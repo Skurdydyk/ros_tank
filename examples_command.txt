@@ -66,3 +66,8 @@ source devel/setup.bash && roslaunch rplidar_ros view_rplidar.launch
 # Start a rplidar node and run rplidar client process to print the raw scan result
 roslaunch rplidar_ros rplidar.launch
 
+# Run docker container
+sudo docker run -device=/dev/ttyUSB0 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY {id_image}
+
+# Run docker container in terminal 
+sudo docker exec -it {id_container}  bash
