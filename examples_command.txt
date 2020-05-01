@@ -52,5 +52,8 @@ https://www.youtube.com/watch?v=N6K2LWG2kRI&list=PLuteWQUGtU9BU0sQIVqRQa24p-pSBC
 http://wiki.ros.org/ROS/Tutorials
 
 # enter to rp
-ssh ubuntu@ubiquityrobot.local ubuntu Welcome!
+ssh ubuntu@ubiquityrobot.local ubuntu robotseverywhere 
+
+# arduino connect
+ls /dev/tty*
 
