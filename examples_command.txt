@@ -1,0 +1,53 @@
+# Run ROS
+roscore
+
+# Run example with turtle
+rosrun turtlesim turtlesim_node
+rosrun turtlesim turtle_teleop_key
+
+# Run rqt graph
+rosrun rqt_graph rqt_graph
+
+# List topics
+rostopic -h
+rostopic list -h
+rostopic bw     display bandwidth used by topic
+rostopic echo   print messages to screen
+rostopic hz     display publishing rate of topic    
+rostopic list   print information about active topics
+rostopic pub    publish data to topic
+rostopic type   print topic type
+rostopic echo /turtle1/cmd_vel
+
+# Let's create and build a catkin workspace:
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+
+# To add the workspace to your ROS environment you need to source the generated setup file:
+. ~/catkin_ws/devel/setup.bash
+
+# Creating a catkin Package
+cd ~/catkin_ws/src
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+
+# Writing the Subscriber Node
+roscd beginner_tutorials/scripts/
+wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+chmod +x listener.py
+rosrun beginner_tutorials listener.py
+
+# Run teleop 
+rosrun twist_keyboard teleop_twist_keyboard.py
+
+# Configure api ros
+export ROS_IP=`hostname -I`
+export ROS_MASTER_URI=http://ubiquityrobot.local:11311
+
+# Tutorial ROS 
+https://www.youtube.com/watch?v=N6K2LWG2kRI&list=PLuteWQUGtU9BU0sQIVqRQa24p-pSBCYNv
+http://wiki.ros.org/ROS/Tutorials
+
+# enter to rp
+ssh ubuntu@ubiquityrobot.local ubuntu Welcome!
+
