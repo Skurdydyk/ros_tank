@@ -2,7 +2,7 @@
 roscore
 
 # kill roscore
-killall -9 roscore
+killall -9 roscore && killall -9 rosmaster
 
 # Run example with turtle
 rosrun turtlesim turtlesim_node
@@ -58,5 +58,11 @@ ssh ubuntu@ubiquityrobot.local ubuntu robotseverywhere
 ls /dev/tty*
 
 # Run lidar
+ls -l /dev |grep ttyUSB && sudo chmod 666 /dev/ttyUSB0
+
+# Start a rplidar node and view the scan result in rviz.
 source devel/setup.bash && roslaunch rplidar_ros view_rplidar.launch
+
+# Start a rplidar node and run rplidar client process to print the raw scan result
+roslaunch rplidar_ros rplidar.launch
 
