@@ -57,3 +57,6 @@ ssh ubuntu@ubiquityrobot.local ubuntu robotseverywhere
 # arduino connect
 ls /dev/tty*
 
+# Run lidar
+source devel/setup.bash && roslaunch rplidar_ros view_rplidar.launch
+
