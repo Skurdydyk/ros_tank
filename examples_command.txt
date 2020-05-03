@@ -38,10 +38,10 @@ catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
 roscd beginner_tutorials/scripts/
 wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
 chmod +x listener.py
-rosrun beginner_tutorials listener.py
+rosrun beg listener.py
 
 # Run teleop 
-rosrun twist_keyboard teleop_twist_keyboard.py
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 # Configure api ros
 export ROS_IP=`hostname -I`
