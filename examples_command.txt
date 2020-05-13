@@ -71,3 +71,6 @@ sudo docker run -device=/dev/ttyUSB0 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY
 
 # Run docker container in terminal 
 sudo docker exec -it {id_container}  bash
+
+# add ping library to docker container
+apt-get update && apt-get install iputils-ping
