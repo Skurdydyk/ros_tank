@@ -1,0 +1,60 @@
+https://sohabr.net/habr/post/398583/
+
+Установка пакетов ROS Kinetic предельно проста — используем apt-get:
+
+sudo apt-get install ros-kinetic-desktop
+
+Установим rviz — графическую утилиту для визуализации данных, получаемых с сенсоров, в ROS:
+
+sudo apt-get install ros-kinetic-rviz
+
+Добавим путь к пакетам ROS в системный путь с помощью команды source:
+
+source /opt/ros/kinetic/setup.bash
+
+Добавим команду в файл ~/.bashrc, чтобы не приходилось выполнять эту команду при открытии нового окна терминала:
+
+echo ‘source /opt/ros/kinetic/setup.bash’ >> ~/.bashrc
+
+Проверим, что ROS и rviz установлены:
+
+roscore
+rosrun rviz rviz
+
+Должно открыться окно rviz подобное этому
+
+Теперь нам осталось только установить необходимые пакеты для Hector SLAM и драйвер для нашего RPLidar. Для работы с Hector SLAM установим специальный ROS пакет hector_slam через apt-get:
+
+sudo apt-get install ros-kinetic-hector-slam
+
+Нам будет также необходим пакет rplidar_ros. Этот пакет отвечает за обработку данных, получаемых с лазера RPLidar, и публикацию этих данных на специальный топик. Установим rplidar_ros драйвер для RPLidar:
+
+cd ~/catkin_ws/src
+git clone https://github.com/robopeak/rplidar_ros.git
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
+
+
+
+Мы наконец-то может попробовать все на практике. Для начала, запустим наш драйвер для RPLidar:
+
+roscore
+roslaunch rplidar_ros rplidar.launch
+
+Мы можем в первый раз получить ошибку доступа к порту /dev/ttyUSB0:
+
+Error, cannot bind to the specified serial port /dev/ttyUSB0.
+
+Нам нужно дать права на чтение / запись порта для всех пользователей:
+
+sudo chmod a+rw /dev/ttyUSB0
+
+Теперь все пойдет без проблем:
+
+roslaunch rplidar_ros rplidar.launch
+rosrun rviz rviz
+
+Подобно тому, как мы делали в статье, найдем в окне rviz в левой панели Displays секцию Global options, развернем ее и установим значение /laser для поля Fixed frame.
+
+В той же левой панели внизу нажмите кнопку Add и выберите в списке в открывшемся окне LaserScan и нажмите OK. В левой панели Displays появится новый пункт LaserScan. Разверните его и введите значение топика /scan.
