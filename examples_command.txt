@@ -66,6 +66,9 @@ source devel/setup.bash && roslaunch rplidar_ros view_rplidar.launch
 # Start a rplidar node and run rplidar client process to print the raw scan result
 roslaunch rplidar_ros rplidar.launch
 
+# Once inside, we'll need to setup our environment. The best way to do this is to using the entrypoint script included in the docker image:
+source ros_entrypoint.sh
+
 # Run docker container
 sudo docker run -device=/dev/ttyUSB0 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY {id_image}
 
