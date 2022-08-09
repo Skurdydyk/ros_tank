@@ -11,6 +11,9 @@ rosrun turtlesim turtle_teleop_key
 # Run rqt graph
 rosrun rqt_graph rqt_graph
 
+ps faux | grep gzclient
+ps faux | grep gzserver
+
 # List topics
 rostopic -h
 rostopic list -h
