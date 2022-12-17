@@ -82,3 +82,6 @@ sudo docker exec -it {id_container}  bash
 apt-get update && apt-get install iputils-ping
 
 sudo adduser $USER dialout
+
+sudo apt-get install splitvt
+splitvt
