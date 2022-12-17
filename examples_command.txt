@@ -84,3 +84,9 @@ apt-get update && apt-get install iputils-ping
 sudo adduser $USER dialout
 
 ssh sviat@192.168.0.140
+
+export ROS_MASTER_URI=http://192.168.*.***:11311
+# Find your IP address
+export ROS_IP=$(hostname -I | awk '{print $1;}')
+# ROS needs this sometimes; just in case
+export ROS_HOSTNAME=$ROS_IP
