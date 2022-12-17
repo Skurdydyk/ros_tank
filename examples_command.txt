@@ -83,5 +83,4 @@ apt-get update && apt-get install iputils-ping
 
 sudo adduser $USER dialout
 
-sudo apt-get install splitvt
-splitvt
+ssh sviat@192.168.0.140
