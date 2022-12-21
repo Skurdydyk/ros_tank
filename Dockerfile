@@ -15,7 +15,13 @@ RUN mkdir catkin_ws &&  \
     cd src && \
     git clone https://github.com/Skurdydyk/teleop_twist_keyboard.git && \
     git clone https://github.com/Skurdydyk/usb_cam.git && \
-    git clone https://github.com/Skurdydyk/rplidar_ros.git
+    git clone https://github.com/Skurdydyk/rplidar_ros.git && \
+    git clone https://github.com/Skurdydyk/navigation.git && \
+    git clone https://github.com/Skurdydyk/slam_gmapping.git && \
+    git clone https://github.com/Skurdydyk/openslam_gmapping.git && \
+    git clone https://github.com/Skurdydyk/geometry2.git && \
+    git clone https://github.com/Skurdydyk/navigation_msgs.git && \
+    git clone https://github.com/Skurdydyk/vision_opencv.git
 
 RUN /bin/bash -c 'cd ../../; \
     source ros_entrypoint.sh; \
