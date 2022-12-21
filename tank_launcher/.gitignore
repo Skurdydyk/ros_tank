@@ -1,6 +1,0 @@
-catkin_ws/build
-catkin_ws/devel
-examples.txt
-navigation_msgs
-slam_gmapping
-openslam_gmapping
