@@ -15,7 +15,7 @@ RUN mkdir catkin_ws &&  \
     cd src && \
     git clone https://github.com/Skurdydyk/teleop_twist_keyboard.git && \
     git clone https://github.com/Skurdydyk/usb_cam.git && \
-    git clode https://github.com/Skurdydyk/rplidar_ros.git
+    git clone https://github.com/Skurdydyk/rplidar_ros.git
 
 RUN /bin/bash -c 'cd ../../; \
     source ros_entrypoint.sh; \
