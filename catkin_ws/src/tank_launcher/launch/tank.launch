@@ -31,6 +31,9 @@
             <param name="angle_compensate" type="bool" value="true"/>
         </node>
 
+        <!-- Run teleop twist keyboard -->
+        <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
+
         <!-- Show in Rviz -->
         <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find tank_launcher)/rviz/lidar.rviz"/>
 
