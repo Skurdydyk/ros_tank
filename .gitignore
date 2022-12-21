@@ -1,3 +1,8 @@
 catkin_ws/build
 catkin_ws/devel
 examples.txt
+navigation
+navigation_msgs
+slam_gmapping
+openslam_gmapping
+geometry2
