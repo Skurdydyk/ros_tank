@@ -1,4 +1,3 @@
-
 <launch>
     <!-- Namespace   -->
     <arg name="namespace" default="ros_tank"/>
