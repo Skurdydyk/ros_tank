@@ -1,0 +1,15 @@
+<launch>
+    <!-- Namespace   -->
+    <arg name="namespace" default="ros_tank"/>
+   
+    <!-- launch nodes in namespace -->
+    <group ns="$(arg namespace)">
+
+        <!-- Run teleop twist keyboard -->
+        <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
+
+        <!-- Show in Rviz -->
+        <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find ros_tank)/rviz/lidar.rviz"/>
+
+    </group>
+</launch>
