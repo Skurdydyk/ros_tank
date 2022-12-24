@@ -30,9 +30,9 @@ RUN /bin/bash -c 'cd ../../; \
 
 RUN cd catkin_ws/src
 
-COPY /catkin_ws/src/tank_launcher /catkin_ws/src/tank_launcher/
+COPY ./ros_tank /catkin_ws/src/ros_tank/
 
 RUN /bin/bash -c 'cd ../../; \
     source ros_entrypoint.sh; \
     cd catkin_ws; \
-    catkin_make --only-pkg-with-deps tank_launcher;'
+    catkin_make --only-pkg-with-deps ros_tank;'
