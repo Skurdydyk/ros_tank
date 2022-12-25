@@ -11,4 +11,4 @@ docker run -it --net=host --rm \
     --volume="/tmp/.docker.xauth:/tmp/.docker.xauth" \
     --name="ros_noetic_container" \
     ros_noetic \
-    bash -it -c "roscore;"
+    bash
