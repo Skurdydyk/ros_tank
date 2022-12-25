@@ -28,7 +28,10 @@ RUN apt-get update && \
     apt-get install -y libsdl-image1.2-dev && \
     apt-get install libsdl-dev && \
     apt-get install -y git && \
-    apt-get install -y libyaml-cpp-dev
+    apt-get install -y libyaml-cpp-dev && \
+    apt install -y python3-pip && \ 
+    apt install -y vim && \
+    pip3 install pyserial
 
 RUN apt-get install -y ros-noetic-cv-bridge
 
