@@ -8,6 +8,10 @@
         <!-- Run teleop twist keyboard -->
         <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
 
+        <!-- Run the map server -->
+        <arg name="map_file" default="$(find ros_tank)/maps/flat.yaml"/>
+        <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
         <!-- Show in Rviz -->
         <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find ros_tank)/rviz/lidar.rviz"/>
 
