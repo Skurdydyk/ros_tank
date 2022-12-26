@@ -8,7 +8,7 @@ from geometry_msgs.msg import Twist
 utf = 'utf-8'
 
 move = {
-    "on": 0.8,
+    "on": 0.5,
     "back": -0.5,
     "left": 1,
     "right": -1,
@@ -26,16 +26,16 @@ def callback(data):
 			rospy.loginfo('Move back')
 			ser.write(bytes('s\n', utf))
 
-		elif data.linear.x == move["stop"] and data.angular.z == move["stop"]:
-			rospy.loginfo('Stop')
-			ser.write(bytes('x\n', utf))
-
 		if data.angular.z == move["left"]:
 			rospy.loginfo('Move left')
 			ser.write(bytes('a\n', utf))
 		elif data.angular.z == move["right"]:
 			rospy.loginfo('Move right')
 			ser.write(bytes('d\n', utf))
+
+		elif data.linear.x == move["stop"] and data.angular.z == move["stop"]:
+			rospy.loginfo('Stop')
+			ser.write(bytes('x\n', utf))
     	
     
 

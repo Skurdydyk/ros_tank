@@ -5,15 +5,6 @@
     <!-- launch nodes in namespace -->
     <group ns="$(arg namespace)">
 
-        <!-- Run lidar A1 -->
-        <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
-            <param name="serial_port" type="string" value="/dev/ttyUSB0"/>
-            <param name="serial_baudrate" type="int" value="115200"/>
-            <param name="frame_id" type="string" value="map"/>
-            <param name="inverted" type="bool" value="false"/>
-            <param name="angle_compensate" type="bool" value="true"/>
-        </node>
-
         <!-- Defining args for slam_gmapping node -->
         <arg name="scan_topic" default="/ros_tank/scan" />
         <arg name="base_frame" default="base_link"/>
