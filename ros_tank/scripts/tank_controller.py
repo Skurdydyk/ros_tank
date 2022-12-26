@@ -40,13 +40,12 @@ def callback(data):
     
 
 def listener():
-	rospy.loginfo('Init_node listener')
 	rospy.init_node('listener', anonymous=True)
-	rospy.loginfo('Create subscriber')
+	rospy.loginfo('Init_node listener')
 	rospy.Subscriber(TOPIC_CMD_VEL, Twist, callback)
+	rospy.loginfo('Create subscriber')
 	
 	rospy.spin()
 
 if __name__ == '__main__':
-	rospy.loginfo('Start listener')
 	listener()
