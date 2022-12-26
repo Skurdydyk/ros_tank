@@ -12,3 +12,5 @@ Command to check available lidar:
 ls -l /dev |grep ttyUSB
 
 sudo chmod 666 /dev/ttyUSB0
+
+![Selection_096](https://user-images.githubusercontent.com/23004657/209576988-321a2a82-18bd-4550-98bb-9a9118b5310c.png)
