@@ -20,8 +20,8 @@ TOPIC_CMD_VEL = '/cmd_vel'
 def callback(data):
 	with serial.Serial(PORT, 9600, timeout=10) as ser:
 		if data.linear.x == move["on"]:
-			ser.wite(bytes('w\n', utf))
 			rospy.loginfo('Move on')
+			ser.write(bytes('w\n', utf))
 		elif data.linear.x == move["back"]:
 			rospy.loginfo('Move back')
 			ser.write(bytes('s\n', utf))
