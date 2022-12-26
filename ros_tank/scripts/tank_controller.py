@@ -23,19 +23,19 @@ def callback(data):
 			ser.write(bytes('w\n', utf))
 			rospy.loginfo('Move on')
 		elif data.linear.x == move["back"]:
-			rospy.loginfo('Move back')
 			ser.write(bytes('s\n', utf))
+			rospy.loginfo('Move back')
 
 		if data.angular.z == move["left"]:
-			rospy.loginfo('Move left')
 			ser.write(bytes('a\n', utf))
+			rospy.loginfo('Move left')
 		elif data.angular.z == move["right"]:
-			rospy.loginfo('Move right')
 			ser.write(bytes('d\n', utf))
+			rospy.loginfo('Move right')
 
 		elif data.linear.x == move["stop"] and data.angular.z == move["stop"]:
-			rospy.loginfo('Stop')
 			ser.write(bytes('x\n', utf))
+			rospy.loginfo('Stop')
     	
     
 
