@@ -15,12 +15,12 @@ move = {
 	"stop": 0
 }
 PORT = '/dev/ttyACM0'
-TOPIC_CMD_VEL = '/cmd_vel'
+TOPIC_CMD_VEL = '/ros_tank/cmd_vel'
 
 def callback(data):
 	with serial.Serial(PORT, 9600, timeout=10) as ser:
 		if data.linear.x == move["on"]:
-			ser.wite(bytes('w\n', utf))
+			ser.write(bytes('w\n', utf))
 			rospy.loginfo('Move on')
 		elif data.linear.x == move["back"]:
 			rospy.loginfo('Move back')
