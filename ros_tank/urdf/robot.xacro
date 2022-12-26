@@ -1,0 +1,282 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find robot_project)/urdf/gazebo.xacro" />
+    <!-- Parameters -->
+    <xacro:property name="chassis_mass" value="10" />
+
+    <xacro:property name="radius_wheel" value="0.15" />
+    <xacro:property name="length_wheel" value="0.06" />
+
+    <xacro:property name="radius_cylinder_wheel" value="0.04" />
+    <xacro:property name="length_cylinder_wheel" value="0.06" />
+
+    <!-- Gazebo tags - Laser scan -->
+    <gazebo reference="joint_laser_scan_chassis">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="link_laser_scan">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <!-- Link - chassis -->
+    <link name="link_chassis">
+        <inertial>
+            <mass value="10" />
+            <origin xyz="0 0 0.3" rpy="0 0 0" />
+            <inertia ixx="1.5417" ixy="0" ixz="0" iyy="3.467" iyz="0" izz="4.742" />
+        </inertial>
+
+        <collision>
+            <geometry>
+                <box size="1 0.6 0.2" />
+            </geometry>
+        </collision>
+
+        <visual>
+            <geometry>
+                <box size="1 0.6 0.2" />
+            </geometry>
+            <material name="DarkBlue">
+                <color rgba="0.2 0.2 0.4 1" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="joint_chassis_left_back_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.45 0.28 0" />
+        <child link="link_left_back_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <link name="link_left_back_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="joint_chassis_right_back_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.45 -0.28 0" />
+        <child link="link_right_back_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <link name="link_right_back_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="joint_chassis_left_front_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="0.45 0.28 0" />
+        <child link="link_left_front_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <link name="link_left_front_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="joint_chassis_right_front_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="0.45 -0.28 0" />
+        <child link="link_right_front_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <link name="link_right_front_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.05 0" />
+            <geometry>
+                <cylinder length="${length_cylinder_wheel}" radius="${radius_cylinder_wheel}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+    </link>
+
+    <!-- Laser scan -->
+    <joint name="joint_laser_scan_chassis" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.16" />
+        <child link="link_laser_scan" />
+        <parent link="link_chassis" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <link name="link_laser_scan">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <mass value="0.5" />
+            <inertia ixx="0.000252666666667" ixy="0" ixz="0" iyy="0.000252666666667" iyz="0" izz="0.0005"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.1" length="0.15"/>
+            </geometry>
+            <material name="Red">
+                <color rgba="0.7 0.1 0.1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.1" length="0.15"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Camera -->
+    <joint name="camera_joint" type="fixed">
+        <parent link="link_chassis"/>
+        <child link="camera_link"/>
+        <origin xyz="0.45 0 0.13" rpy="0 0 0"/>
+    </joint>
+
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.06"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>
