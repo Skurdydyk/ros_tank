@@ -3,7 +3,7 @@ Tank launch project:
 - lidar package
 
 Command to check available cameras:
-ls /dev | grep video*\
+ls /dev | grep video*
 
 Then change value param for tank launcher:
 <param name="video_device" value="/dev/video4" />
