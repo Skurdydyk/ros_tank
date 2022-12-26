@@ -21,7 +21,8 @@ RUN mkdir catkin_ws &&  \
     git clone https://github.com/Skurdydyk/navigation_msgs.git && \
     git clone https://github.com/Skurdydyk/vision_opencv.git && \
     git clone https://github.com/Skurdydyk/usb_cam.git && \
-    git clone https://github.com/Skurdydyk/rplidar_ros.git 
+    git clone https://github.com/Skurdydyk/rplidar_ros.git && \ 
+    git clone https://github.com/Skurdydyk/hector_slam.git
 
 COPY ./ros_tank /catkin_ws/src/ros_tank/
 
