@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot>
     <!-- Colors -->
-    <gazebo reference="link_chassis">
+    <!-- <gazebo reference="link_chassis">
         <material>Gazebo/Blue</material>
     </gazebo>
     <gazebo reference="link_left_back_wheel">
@@ -23,22 +23,10 @@
         <material>Gazebo/Black</material>
         <mu1>0</mu1>
         <mu2>0</mu2>
-    </gazebo>
+    </gazebo> -->
 
-    <gazebo>
-        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-            <alwaysOn>true</alwaysOn>
-            <updateRate>30</updateRate>
-            <leftJoint>joint_chassis_left_back_wheel</leftJoint>
-            <rightJoint>joint_chassis_right_back_wheel</rightJoint>
-            <wheelSeparation>0.6</wheelSeparation>
-            <wheelDiameter>0.3</wheelDiameter>
-            <torque>10</torque>
-            <commandTopic>cmd_vel</commandTopic>
-            <odometryTopic>odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
-            <robotBaseFrame>link_chassis</robotBaseFrame>
-        </plugin>
+    <gazebo reference="link_chassis">
+        <material>Gazebo/Blue</material>
     </gazebo>
 
     <!-- Gazebo tags - Laser scan -->
@@ -49,6 +37,26 @@
         <material>Gazebo/DarkGrey</material>
     </gazebo>
 
+    <gazebo reference="joint_chassis_left_front_wheel">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="joint_chassis_left_rear_wheel">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="joint_chassis_right_front_wheel">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="joint_chassis_right_rear_wheel">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+
+    <!-- Gazebo tags - Laser scan -->
+    <gazebo reference="joint_laser_scan_chassis">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="link_laser_scan">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo> 
     <gazebo reference="link_laser_scan">
         <sensor type="ray" name="head_hokuyo_sensor">
             <pose>0 0 0 0 0 0</pose>
@@ -80,9 +88,9 @@
             </plugin>
         </sensor>
     </gazebo>
-
+ 
     <gazebo reference="camera_link">
-        <sensor name="camera" type="camera">
+        <sensor name="camera_robot" type="camera">
             <camera>
                 <pose> 0 0 0 0 0 0 </pose>
                 <visualize>true</visualize>
@@ -102,6 +110,21 @@
                 <frame_name>camera_link_optical</frame_name>
             </plugin>
         </sensor>
-    </gazebo>
+    </gazebo> 
 
+    <!-- <gazebo>
+        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>20</updateRate>
+            <leftJoint>joint_chassis_left_middle_wheel</leftJoint>
+            <rightJoint>joint_chassis_right_middle_wheel</rightJoint>
+            <wheelSeparation>1.66</wheelSeparation>
+            <wheelDiameter>0.8</wheelDiameter>
+            <torque>10</torque>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>link_chassis</robotBaseFrame>
+        </plugin>
+    </gazebo> -->
 </robot>
