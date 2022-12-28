@@ -42,6 +42,12 @@
     </joint>
 
     <link name="camera_link">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.08 0.038"/>
+            </geometry>
+        </collision>
         <visual>
             <geometry>
                 <mesh filename="package://ros_tank/meshes/camera.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
@@ -52,6 +58,12 @@
 
     <!-- Link - chassis -->
     <link name="link_chassis">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.22 0.14 0.25" />
+            </geometry>
+        </collision>
         <visual>
             <geometry>
                 <!-- <box size="0.22 0.14 0.25" /> -->
