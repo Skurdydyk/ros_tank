@@ -29,7 +29,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.2" length="0.1"/>
+                <cylinder radius="0.04" length="0.04"/>
             </geometry>
         </collision>
     </link>
@@ -52,11 +52,6 @@
 
     <!-- Link - chassis -->
     <link name="link_chassis">
-        <inertial>
-            <mass value="10" />
-            <origin xyz="0 0 0.3" rpy="0 0 0" />
-            <inertia ixx="1.5417" ixy="0" ixz="0" iyy="3.467" iyz="0" izz="4.742" />
-        </inertial>
         <visual>
             <geometry>
                 <!-- <box size="0.22 0.14 0.25" /> -->

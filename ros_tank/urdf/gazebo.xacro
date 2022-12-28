@@ -112,7 +112,7 @@
         </sensor>
     </gazebo> 
 
-    <gazebo>
+    <!-- <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
             <alwaysOn>true</alwaysOn>
             <updateRate>20</updateRate>
@@ -121,10 +121,18 @@
             <wheelSeparation>1.66</wheelSeparation>
             <wheelDiameter>0.8</wheelDiameter>
             <torque>10</torque>
+            <wheelTorque>5</wheelTorque>
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
             <robotBaseFrame>link_chassis</robotBaseFrame>
+            <publishWheelTF>true</publishWheelTF>
+            <publishWheelJointState>true</publishWheelJointState>
+            <publishOdomTF>true</publishOdomTF>
+            <wheelAcceleration>0</wheelAcceleration>
+            <odometrySource>world</odometrySource>
+            <publishTf>1</publishTf>
+            <rosDebugLevel>na</rosDebugLevel>
         </plugin>
-    </gazebo>
+    </gazebo> -->
 </robot>

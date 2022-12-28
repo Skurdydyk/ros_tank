@@ -7,7 +7,8 @@ ENV DISPLAY=:1 \
 RUN apt-get update && \
     apt-get install -y libsdl-image1.2-dev && \
     apt-get install libsdl-dev && \
-    apt-get install -y git
+    apt-get install -y git && \
+    apt install -y vim
 
 RUN mkdir catkin_ws &&  \
     cd catkin_ws && \
