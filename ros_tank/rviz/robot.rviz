@@ -124,7 +124,7 @@ Visualization Manager:
       Value: false
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /image_raw
+      Image Topic: /camera/image_raw
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -157,7 +157,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Flat Squares
-      Topic: ""
+      Topic: /laser/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true

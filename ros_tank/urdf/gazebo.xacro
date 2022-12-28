@@ -6,13 +6,13 @@
     </gazebo>
     <gazebo reference="link_front_left_wheel">
         <material>Gazebo/Black</material>
-        <mu1>0.1</mu1>
-        <mu2>0.1</mu2>
+        <mu1>0</mu1>
+        <mu2>0</mu2>
     </gazebo>
     <gazebo reference="link_rear_right_wheel">
         <material>Gazebo/Black</material>
-        <mu1>0.1</mu1>
-        <mu2>0.1</mu2>
+        <mu1>0</mu1>
+        <mu2>0</mu2>
     </gazebo>
     <gazebo reference="link_rear_left_wheel">
         <material>Gazebo/Black</material>
@@ -24,9 +24,15 @@
         <mu1>0</mu1>
         <mu2>0</mu2>
     </gazebo>
-
-    <gazebo reference="link_chassis">
-        <material>Gazebo/Blue</material>
+    <gazebo reference="link_middle_right_wheel">
+        <material>Gazebo/Black</material>
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+    </gazebo>
+    <gazebo reference="link_middle_left_wheel">
+        <material>Gazebo/Black</material>
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
     </gazebo>
 
     <!-- Gazebo tags - Laser scan -->
@@ -35,9 +41,9 @@
     </gazebo>
     <gazebo reference="link_laser_scan">
         <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
-    <gazebo reference="joint_chassis_left_front_wheel">
+    </gazebo> 
+      
+    <!-- <gazebo reference="joint_chassis_left_front_wheel">
         <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
     <gazebo reference="joint_chassis_left_rear_wheel">
@@ -48,15 +54,8 @@
     </gazebo>
     <gazebo reference="joint_chassis_right_rear_wheel">
         <preserveFixedJoint>true</preserveFixedJoint>
-    </gazebo>
-
-    <!-- Gazebo tags - Laser scan -->
-    <gazebo reference="joint_laser_scan_chassis">
-        <preserveFixedJoint>true</preserveFixedJoint>
-    </gazebo>
-    <gazebo reference="link_laser_scan">
-        <material>Gazebo/DarkGrey</material>
-    </gazebo> 
+    </gazebo>  
+     -->
     <gazebo reference="link_laser_scan">
         <sensor type="ray" name="head_hokuyo_sensor">
             <pose>0 0 0 0 0 0</pose>
@@ -87,8 +86,9 @@
                 <frameName>link_chassis</frameName>
             </plugin>
         </sensor>
-    </gazebo>
+    </gazebo> 
  
+     <!-- camera -->
     <gazebo reference="camera_link">
         <sensor name="camera_robot" type="camera">
             <camera>
@@ -101,16 +101,22 @@
                     <width>640</width>
                     <height>480</height>
                 </image>
-                <clip>
-                    <near>0.05</near>
-                    <far>30.0</far>
-                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
             </camera>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                <frame_name>camera_link_optical</frame_name>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>0.0</updateRate>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraName>camera</cameraName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>link_chassis</frameName>
             </plugin>
         </sensor>
-    </gazebo> 
+    </gazebo>
 
     <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
@@ -118,13 +124,21 @@
             <updateRate>20</updateRate>
             <leftJoint>joint_chassis_left_middle_wheel</leftJoint>
             <rightJoint>joint_chassis_right_middle_wheel</rightJoint>
-            <wheelSeparation>1.66</wheelSeparation>
-            <wheelDiameter>0.8</wheelDiameter>
+            <wheelSeparation>0.14</wheelSeparation>
+            <wheelDiameter>0.04</wheelDiameter>
             <torque>10</torque>
+            <wheelTorque>5</wheelTorque>
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
             <robotBaseFrame>link_chassis</robotBaseFrame>
+            <publishWheelTF>false</publishWheelTF>
+            <publishWheelJointState>false</publishWheelJointState>
+            <publishOdomTF>true</publishOdomTF>
+            <wheelAcceleration>0</wheelAcceleration>
+            <rosDebugLevel>na</rosDebugLevel>
+            <odometrySource>world</odometrySource>
+            <publishTf>1</publishTf>
         </plugin>
     </gazebo>
 </robot>
