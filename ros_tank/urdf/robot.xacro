@@ -1,16 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find ros_tank)/urdf/gazebo.xacro" />
-    <!-- Parameters -->
-    <xacro:property name="chassis_mass" value="10" />
 
-    <xacro:property name="radius_wheel" value="0.15" />
-    <xacro:property name="length_wheel" value="0.06" />
-
-    <xacro:property name="radius_cylinder_wheel" value="0.04" />
-    <xacro:property name="length_cylinder_wheel" value="0.06" />
-
-   
     <!-- Laser scan -->
     <joint name="joint_laser_scan_chassis" type="fixed">
         <origin rpy="0 0 0" xyz="-0.01 0 0.11" />

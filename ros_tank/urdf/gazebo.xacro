@@ -1,29 +1,29 @@
 <?xml version="1.0"?>
 <robot>
     <!-- Colors -->
-    <!-- <gazebo reference="link_chassis">
+    <gazebo reference="link_chassis">
         <material>Gazebo/Blue</material>
     </gazebo>
-    <gazebo reference="link_left_back_wheel">
+    <gazebo reference="link_front_left_wheel">
         <material>Gazebo/Black</material>
         <mu1>0.1</mu1>
         <mu2>0.1</mu2>
     </gazebo>
-    <gazebo reference="link_right_back_wheel">
+    <gazebo reference="link_rear_right_wheel">
         <material>Gazebo/Black</material>
         <mu1>0.1</mu1>
         <mu2>0.1</mu2>
     </gazebo>
-    <gazebo reference="link_left_front_wheel">
+    <gazebo reference="link_rear_left_wheel">
         <material>Gazebo/Black</material>
         <mu1>0</mu1>
         <mu2>0</mu2>
     </gazebo>
-    <gazebo reference="link_right_front_wheel">
+    <gazebo reference="link_front_right_wheel">
         <material>Gazebo/Black</material>
         <mu1>0</mu1>
         <mu2>0</mu2>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo reference="link_chassis">
         <material>Gazebo/Blue</material>
@@ -112,7 +112,7 @@
         </sensor>
     </gazebo> 
 
-    <!-- <gazebo>
+    <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
             <alwaysOn>true</alwaysOn>
             <updateRate>20</updateRate>
@@ -126,5 +126,5 @@
             <odometryFrame>odom</odometryFrame>
             <robotBaseFrame>link_chassis</robotBaseFrame>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 </robot>
