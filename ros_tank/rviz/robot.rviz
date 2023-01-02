@@ -61,6 +61,16 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_second_servo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         link_chassis:
           Alpha: 1
           Show Axes: false
@@ -190,7 +200,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.4902498722076416
+      Distance: 0.41591089963912964
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -198,17 +208,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.19557105004787445
-        Y: -0.27995580434799194
-        Z: -0.07471845299005508
+        X: 0.026583092287182808
+        Y: -0.034294579178094864
+        Z: -0.05090782418847084
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.43539854884147644
+      Pitch: 0.21039874851703644
       Target Frame: <Fixed Frame>
-      Yaw: 0.5653977394104004
+      Yaw: 1.520397663116455
     Saved: ~
 Window Geometry:
   Displays:
