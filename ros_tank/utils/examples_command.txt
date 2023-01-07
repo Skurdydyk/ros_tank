@@ -91,8 +91,13 @@ export ROS_IP=$(hostname -I | awk '{print $1;}')
 # ROS needs this sometimes; just in case
 export ROS_HOSTNAME=$ROS_IP
 
-export ROS_MASTER_URI=http://192.168.1.124:11311 
+export ROS_MASTER_URI=http://192.168.1.***:11311 
 
-export ROS_MASTER_URI=http://192.168.0.154:11311 &&
+export ROS_MASTER_URI=http://192.168.0.***:11311 &&
 export ROS_IP=$(hostname -I | awk '{print $1;}') &&
 export ROS_HOSTNAME=$ROS_IP
+
+
+roslaunch moveit_setup_assistant setup_assistant.launch
+roslaunch my_moveit_config demo.launch
+docker cp id:/catkin_ws/src/my_moveit_config ~/projects/catkin_ws/src/ros_tank
