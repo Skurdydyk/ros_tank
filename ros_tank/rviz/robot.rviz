@@ -5,7 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /LaserScan1
+        - /RobotModel1
       Splitter Ratio: 0.5
     Tree Height: 356
   - Class: rviz/Selection
@@ -53,7 +53,7 @@ Visualization Manager:
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
-      Collision Enabled: false
+      Collision Enabled: true
       Enabled: true
       Links:
         All Links Enabled: true
@@ -67,6 +67,11 @@ Visualization Manager:
           Show Trail: false
           Value: true
         camera_second_servo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_servo_first_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -111,6 +116,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -200,7 +209,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.41591089963912964
+      Distance: 0.732977032661438
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -208,17 +217,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.026583092287182808
-        Y: -0.034294579178094864
-        Z: -0.05090782418847084
+        X: 0.02674511820077896
+        Y: -0.041005175560712814
+        Z: -0.019563283771276474
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.21039874851703644
+      Pitch: 0.29539889097213745
       Target Frame: <Fixed Frame>
-      Yaw: 1.520397663116455
+      Yaw: 1.2703979015350342
     Saved: ~
 Window Geometry:
   Displays:

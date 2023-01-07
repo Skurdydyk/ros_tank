@@ -1,0 +1,8 @@
+controller_list:
+  - name: fake_servos_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - camera_servo_second_joint
+initial:  # Define initial robot poses per group
+  - group: servos
+    pose: ddd
