@@ -37,8 +37,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://ros_tank/meshes/lidarA1.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
-                <!-- <cylinder radius="0.04" length="0.04"/> -->
+                <cylinder radius="0.04" length="0.04"/>
             </geometry>
         </collision>
     </link>
@@ -54,8 +53,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://ros_tank/meshes/camera.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
-                <!-- <box size="0.02 0.08 0.038"/> -->
+                <box size="0.02 0.08 0.038"/>
             </geometry>
         </collision>
         <visual>
@@ -69,10 +67,9 @@
     <!-- Link - chassis -->
     <link name="link_chassis">
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
             <geometry>
-                <!-- <box size="0.22 0.14 0.25" /> -->
-                <mesh filename="package://ros_tank/meshes/tank_body.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
+                <box size="0.25 0.25 0.1" />
             </geometry>
         </collision>
         <visual>
@@ -283,6 +280,12 @@
 
     <!-- Link - camera second servo -->
     <link name="camera_second_servo_link">
+        <collision>
+            <origin xyz="0 0 0.01" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.03 0.03" />
+            </geometry>
+        </collision>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>                
@@ -291,13 +294,6 @@
             </geometry>
             <material name="orange" />
         </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <geometry>
-                <!-- <box size="0.02 0.03 0.03" /> -->
-                <mesh filename="package://ros_tank/meshes/camera_servo_2.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
-            </geometry>
-        </collision>
     </link>
 
      <!-- Joint - camera first servo -->
@@ -311,6 +307,12 @@
 
     <!-- Link - camera first servo -->
     <link name="camera_servo_first_link">
+        <collision>
+            <origin xyz="0 0 -0.005" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.03 0.04 0.03" />
+            </geometry>
+        </collision>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>                
@@ -319,12 +321,5 @@
             </geometry>
             <material name="orange" />
         </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <geometry>
-                <mesh filename="package://ros_tank/meshes/camera_servo_1.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
-                <!-- <box size="0.03 0.04 0.05" /> -->
-            </geometry>
-        </collision>
     </link>
 </robot>

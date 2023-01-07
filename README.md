@@ -17,3 +17,6 @@ Command to check available lidar:
 ls -l /dev |grep ttyUSB
 
 sudo chmod 666 /dev/ttyUSB0
+
+
+roslaunch my_moviet demo.launch
