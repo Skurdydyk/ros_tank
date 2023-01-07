@@ -35,7 +35,7 @@ RUN /bin/bash -c 'cd catkin_ws; ls;\
 
 COPY ./ros_tank /catkin_ws/src/ros_tank/
 
-COPY ./my_moveit_config /catkin_ws/src/my_moveit_config/
+COPY ./my_moviet /catkin_ws/src/my_moviet/
 
 RUN /bin/bash -c 'cd ../../; \
     source ros_entrypoint.sh; \

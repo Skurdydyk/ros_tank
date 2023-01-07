@@ -100,4 +100,12 @@ export ROS_HOSTNAME=$ROS_IP
 
 roslaunch moveit_setup_assistant setup_assistant.launch
 roslaunch my_moveit_config demo.launch
+
 docker cp id:/catkin_ws/src/my_moveit_config ~/projects/catkin_ws/src/ros_tank
+
+colcon build --packages-select <name-of-pkg>
+
+colcon build --packages-select my_moveit
+
+
+docker cp 791300e8159a776bb3837a0a21214d2019b575febb938351571ae887c7ab969e:/catkin_ws/src/my_moviet ~/projects/catkin_ws/src/ros_tank
