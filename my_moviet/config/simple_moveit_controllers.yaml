@@ -1,8 +1,0 @@
-controller_list:
-  - name: camera_servos_controller
-    action_ns: follow_joint_trajectory
-    type: FollowJointTrajectory
-    default: True
-    joints:
-      - camera_servo_first_joint
-      - camera_servo_second_joint
