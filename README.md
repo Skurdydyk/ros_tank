@@ -19,4 +19,7 @@ ls -l /dev |grep ttyUSB
 sudo chmod 666 /dev/ttyUSB0
 
 
+ros2 launch ros_tank spawn.launch.py
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
 roslaunch my_moviet demo.launch

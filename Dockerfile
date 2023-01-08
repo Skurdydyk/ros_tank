@@ -6,6 +6,7 @@ ENV DISPLAY=:1 \
 
 RUN apt-get update && apt-get install -y \
     ros-${ROS_DISTRO}-gazebo-* \
+    ros-${ROS_DISTRO}-joint-state-publisher-gui \
     python-is-python3 \
     git \
     vim \
