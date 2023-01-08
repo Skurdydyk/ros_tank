@@ -1,9 +1,28 @@
 <?xml version="1.0" ?>
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find ros_tank)/urdf/gazebo.xacro" />
+    <!-- <xacro:include filename="$(find ros_tank)/urdf/gazebo.xacro" /> -->
 
     <link name="world"></link>
     
+    <!-- Link - chassis -->
+    <link name="link_chassis">
+        <collision>
+            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.25 0.25 0.1" />
+            </geometry>
+        </collision>
+        <visual>
+            <geometry>
+                <!-- <box size="0.22 0.14 0.25" /> -->
+                <mesh filename="package://ros_tank/meshes/tank_body.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
+            </geometry>
+            <material name="Red">
+                <color rgba="1 0 0 1" />
+            </material>
+        </visual>
+    </link>
+
     <joint name="joint_world" type="fixed">
         <origin rpy="0 0 0" xyz="0 0 0" />
         <child link="link_chassis" />
@@ -43,12 +62,6 @@
     </link>
 
     <!-- Camera -->
-    <joint name="camera_joint" type="fixed">
-        <parent link="camera_second_servo_link"/>
-        <child link="camera_link"/>
-        <origin xyz="0.03 0 0.017" rpy="0 0 0"/>
-    </joint>
-
     <link name="camera_link">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -64,33 +77,10 @@
         </visual>
     </link>
 
-    <!-- Link - chassis -->
-    <link name="link_chassis">
-        <collision>
-            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
-            <geometry>
-                <box size="0.25 0.25 0.1" />
-            </geometry>
-        </collision>
-        <visual>
-            <geometry>
-                <!-- <box size="0.22 0.14 0.25" /> -->
-                <mesh filename="package://ros_tank/meshes/tank_body.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
-            </geometry>
-            <material name="Red">
-                <color rgba="1 0 0 1" />
-            </material>
-        </visual>
-    </link>
-
-    <!-- Joint - chassis / left front wheel -->
-    <joint name="joint_chassis_left_front_wheel" type="fixed">
-        <origin rpy="0 0 0" xyz="0.065 0.077 -0.12" />
-        <child link="link_front_left_wheel" />
-        <parent link="link_chassis" />
-        <axis rpy="0 0 0" xyz="0 1 0" />
-        <limit effort="10000" velocity="1000" />
-        <joint_properties damping="1.0" friction="1.0" />
+    <joint name="camera_joint" type="fixed">
+        <parent link="camera_second_servo_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0.03 0 0.017" rpy="0 0 0"/>
     </joint>
 
     <!-- Link - left front wheel -->
@@ -114,6 +104,37 @@
         </visual>
     </link>
 
+    <!-- Joint - chassis / left front wheel -->
+    <joint name="joint_chassis_left_front_wheel" type="fixed">
+        <origin rpy="0 0 0" xyz="0.065 0.077 -0.12" />
+        <child link="link_front_left_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <!-- Link - left middle wheel -->
+    <link name="link_middle_left_wheel">
+        <inertial>
+            <mass value="10" />
+            <origin xyz="0 0 0.3" rpy="0 0 0" />
+            <inertia ixx="1.5417" ixy="0" ixz="0" iyy="3.467" iyz="0" izz="4.742" />
+        </inertial>
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.015 0" />
+            <geometry>
+                <cylinder length="0.03" radius="0.02"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.015 0" />
+            <geometry>
+                <cylinder length="0.03" radius="0.02"/>
+            </geometry>
+        </visual>
+    </link>
+
     <!-- Joint - chassis / left middle wheel -->
     <joint name="joint_chassis_left_middle_wheel" type="continuous">
         <origin rpy="0 0 0" xyz="0 0.077 -0.12" />
@@ -124,8 +145,8 @@
         <joint_properties damping="1.0" friction="1.0" />
     </joint>
 
-    <!-- Link - left middle wheel -->
-    <link name="link_middle_left_wheel">
+    <!-- Link - left rear wheel -->
+    <link name="link_rear_left_wheel">
         <inertial>
             <mass value="10" />
             <origin xyz="0 0 0.3" rpy="0 0 0" />
@@ -154,27 +175,6 @@
         <limit effort="10000" velocity="1000" />
         <joint_properties damping="1.0" friction="1.0" />
     </joint>
-
-    <!-- Link - left rear wheel -->
-    <link name="link_rear_left_wheel">
-        <inertial>
-            <mass value="10" />
-            <origin xyz="0 0 0.3" rpy="0 0 0" />
-            <inertia ixx="1.5417" ixy="0" ixz="0" iyy="3.467" iyz="0" izz="4.742" />
-        </inertial>
-        <collision>
-            <origin rpy="1.5707 0 0" xyz="0 0.015 0" />
-            <geometry>
-                <cylinder length="0.03" radius="0.02"/>
-            </geometry>
-        </collision>
-        <visual>
-            <origin rpy="1.5707 0 0" xyz="0 0.015 0" />
-            <geometry>
-                <cylinder length="0.03" radius="0.02"/>
-            </geometry>
-        </visual>
-    </link>
 
     <!-- Joint - chassis / right front wheel -->
     <joint name="joint_chassis_right_front_wheel" type="fixed">

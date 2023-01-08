@@ -108,4 +108,6 @@ colcon build --packages-select <name-of-pkg>
 colcon build --packages-select my_moveit
 
 
-docker cp dceda7624d4bf47b4ce9e2b2486ccae81c7e8bc0e2e20d735a8bc17eab90a106:/catkin_ws/src/my_moveit ~/projects/catkin_ws/src/ros_tank
+docker cp fd13ec99eb56eb418a7e3f2837f620ecdbc87ecae03fe3cb557607237c48276f:/catkin_ws/rviz ~/projects/catkin_ws/src/ros_tank/tessss
+
+cd ros2_ws && colcon build && source install/setup.bash && ros2 launch ros_tank spawn.launch.py

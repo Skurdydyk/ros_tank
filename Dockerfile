@@ -1,43 +1,28 @@
-FROM osrf/ros:noetic-desktop-full
+FROM osrf/ros:humble-desktop
 
 ENV DISPLAY=:1 \
     XAUTHORITY="/tmp/.docker.xauth" \
     net=host
 
-RUN apt-get update && \
-    apt-get install -y libsdl-image1.2-dev && \
-    apt-get install libsdl-dev && \
-    apt-get install -y git && \
-    apt install -y vim
+RUN apt-get update && apt-get install -y \
+    ros-${ROS_DISTRO}-gazebo-* \
+    python-is-python3 \
+    git \
+    vim \
+    nano \
+    less \
+    xterm 
 
-RUN mkdir catkin_ws &&  \
-    cd catkin_ws && \
-    mkdir src &&  \
-    cd src && \
-    git clone https://github.com/Skurdydyk/teleop_twist_keyboard.git && \
-    git clone https://github.com/Skurdydyk/navigation.git && \
-    git clone https://github.com/Skurdydyk/slam_gmapping.git && \
-    git clone https://github.com/Skurdydyk/openslam_gmapping.git && \
-    git clone https://github.com/Skurdydyk/geometry2.git && \
-    git clone https://github.com/Skurdydyk/navigation_msgs.git && \
-    git clone https://github.com/Skurdydyk/vision_opencv.git && \
-    git clone https://github.com/Skurdydyk/usb_cam.git && \
-    git clone https://github.com/Skurdydyk/rplidar_ros.git && \ 
-    git clone https://github.com/Skurdydyk/hector_slam.git && \
-    git clone https://github.com/Skurdydyk/xacro.git && \
-    git clone https://github.com/Skurdydyk/panda_moveit_config.git && \
-    git clone https://github.com/Skurdydyk/moveit_tutorials.git
+RUN mkdir -p ros2_ws/src && \
+    cd ros2_ws/src 
+    # && \
+    # git clone https://github.com/ros-controls/ros2_control_demos.git -b galactic && \
+    # vcs import --input ros2_control_demos/ros2_control_demos.galactic.repos
+    
+COPY ./ros_tank ros2_ws/src/ros_tank/
 
-RUN /bin/bash -c 'cd catkin_ws; ls;\
-    source devel/setup.sh; \
-    apt-get update; \
-    rosdep install -y --from-paths . --ignore-src --rosdistro noetic;'
+RUN cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y 
 
-COPY ./ros_tank /catkin_ws/src/ros_tank/
+ENTRYPOINT ["/ros_entrypoint.sh"]
 
-COPY ./my_moviet /catkin_ws/src/my_moviet/
-
-RUN /bin/bash -c 'cd ../../; \
-    source ros_entrypoint.sh; \
-    cd catkin_ws; \
-    catkin_make;'
+CMD ["sleep", "infinity"]
