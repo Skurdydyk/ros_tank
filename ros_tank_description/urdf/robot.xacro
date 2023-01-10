@@ -113,31 +113,43 @@
 
     <gazebo reference="link_front_left_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>0.01</mu1>
         <mu2>0.01</mu2>
     </gazebo>
     <gazebo reference="link_rear_right_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>0.01</mu1>
         <mu2>0.01</mu2>
     </gazebo>
     <gazebo reference="link_rear_left_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>0.01</mu1>
         <mu2>0.01</mu2>
     </gazebo>
     <gazebo reference="link_front_right_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>0.01</mu1>
         <mu2>0.01</mu2>
     </gazebo>
     <gazebo reference="link_middle_right_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>10</mu1>
         <mu2>10</mu2>
     </gazebo>
     <gazebo reference="link_middle_left_wheel">
         <material>Gazebo/Black</material>
+        <kp>1000000000000000000000000000.0</kp>
+        <kd>1000000000000000000000000000.0</kd>
         <mu1>10</mu1>
         <mu2>10</mu2>
     </gazebo>
