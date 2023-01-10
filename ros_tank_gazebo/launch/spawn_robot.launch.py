@@ -19,7 +19,7 @@ def generate_launch_description():
     entity_name = robot_base_name + "-" + str(int(random.random() * 100000))
 
     # Spawn ROBOT Set Gazebo
-    spawn_robot = Node(
+    spawn_robot_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
         name='spawn_entity',
@@ -36,6 +36,6 @@ def generate_launch_description():
     # create and return launch description object
     return LaunchDescription(
         [
-            spawn_robot,
+            spawn_robot_node,
         ]
     )
