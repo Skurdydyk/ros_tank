@@ -1,0 +1,149 @@
+# Run ROS
+roscore
+
+# kill roscore
+killall -9 roscore && killall -9 rosmaster
+
+# Run example with turtle
+rosrun turtlesim turtlesim_node
+rosrun turtlesim turtle_teleop_key
+
+# Run rqt graph
+rosrun rqt_graph rqt_graph
+
+ps faux | grep gzclient
+ps faux | grep gzserver
+
+# List topics
+rostopic -h
+rostopic list -h
+rostopic bw     display bandwidth used by topic
+rostopic echo   print messages to screen
+rostopic hz     display publishing rate of topic    
+rostopic list   print information about active topics
+rostopic pub    publish data to topic
+rostopic type   print topic type
+rostopic echo /turtle1/cmd_vel
+
+# Let's create and build a catkin workspace:
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+
+# To add the workspace to your ROS environment you need to source the generated setup file:
+. ~/catkin_ws/devel/setup.bash
+
+# Creating a catkin Package
+cd ~/catkin_ws/src
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+
+# Writing the Subscriber Node
+roscd beginner_tutorials/scripts/
+wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+chmod +x listener.py
+rosrun beg listener.py
+
+# Run teleop 
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+# Configure api ros
+export ROS_IP=`hostname -I`
+export ROS_MASTER_URI=http://ubiquityrobot.local:11311
+
+# Tutorial ROS 
+https://www.youtube.com/watch?v=N6K2LWG2kRI&list=PLuteWQUGtU9BU0sQIVqRQa24p-pSBCYNv
+http://wiki.ros.org/ROS/Tutorials
+
+# enter to rp
+ssh ubuntu@ubiquityrobot.local ubuntu robotseverywhere 
+
+# arduino connect
+ls /dev/tty*
+
+# Run lidar
+ls -l /dev |grep ttyUSB && sudo chmod 666 /dev/ttyUSB0
+
+# Start a rplidar node and view the scan result in rviz.
+source devel/setup.bash && roslaunch rplidar_ros view_rplidar.launch
+
+# Start a rplidar node and run rplidar client process to print the raw scan result
+roslaunch rplidar_ros rplidar.launch
+
+# Once inside, we'll need to setup our environment. The best way to do this is to using the entrypoint script included in the docker image:
+source ros_entrypoint.sh
+
+# Run docker container
+sudo docker run -device=/dev/ttyUSB0 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY {id_image}
+
+# Run docker container in terminal 
+sudo docker exec -it {id_container}  bash
+
+# add ping library to docker container
+apt-get update && apt-get install iputils-ping
+
+sudo adduser $USER dialout
+
+ssh sviat@192.168.0.140
+
+export ROS_MASTER_URI=http://192.168.*.***:11311
+# Find your IP address
+export ROS_IP=$(hostname -I | awk '{print $1;}')
+# ROS needs this sometimes; just in case
+export ROS_HOSTNAME=$ROS_IP
+
+export ROS_MASTER_URI=http://192.168.1.***:11311 
+
+export ROS_MASTER_URI=http://192.168.0.***:11311 &&
+export ROS_IP=$(hostname -I | awk '{print $1;}') &&
+export ROS_HOSTNAME=$ROS_IP
+
+
+roslaunch moveit_setup_assistant setup_assistant.launch
+roslaunch my_moveit_config demo.launch
+
+docker cp id:/catkin_ws/src/my_moveit_config ~/projects/catkin_ws/src/ros_tank
+
+colcon build --packages-select <name-of-pkg>
+
+colcon build --packages-select my_moveit
+
+
+docker cp fd13ec99eb56eb418a7e3f2837f620ecdbc87ecae03fe3cb557607237c48276f:/catkin_ws/rviz ~/projects/catkin_ws/src/ros_tank/tessss
+
+
+ros2 launch my_box_bot_description urdf_visualize_meshes.launch.py
+ros2 topic info /robot_description --verbose
+ros2 run tf2_tools view_frames
+
+sudo apt update
+sudo apt install ros-humble-joint-state-publisher-gui
+
+
+cd ros2_ws && colcon build && source install/setup.bash && ros2 launch ros_tank_gazebo spawn_robot.launch.py
+cd ros2_ws && colcon build && source install/setup.bash && ros2 launch ros_tank_gazebo empty_world.launch.py
+cd ros2_ws && colcon build && source install/setup.bash && ros2 launch ros_tank_gazebo main.launch.xml
+
+
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
+cd ros2_ws && source install/setup.bash
+
+cd ros2_ws && colcon build && source install/setup.bash
+
+
+cd ros2_ws && colcon build && source install/setup.bash && ros2 launch ros_tank_gazebo start_world.launch.py
+
+cd ros2_ws && source install/setup.bash && ros2 launch ros_tank_gazebo spawn_robot.launch.xml
+
+
+1. sensing
+2. xacro
+
+3. ros_tank gazebo
+4. ros_tank lidar
+5. ros_tank camera
+
+6. ros_tank diff_drive_control + teleop_twist_keyboard
+
+7. ros_tank moveit2
+8. ros_tank controller joint camera links

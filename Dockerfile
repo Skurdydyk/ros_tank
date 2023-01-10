@@ -20,7 +20,8 @@ RUN mkdir -p ros2_ws/src && \
     # git clone https://github.com/ros-controls/ros2_control_demos.git -b galactic && \
     # vcs import --input ros2_control_demos/ros2_control_demos.galactic.repos
     
-COPY ./ros_tank ros2_ws/src/ros_tank/
+COPY ./ros_tank_description ros2_ws/src/ros_tank_description/
+COPY ./ros_tank_gazebo ros2_ws/src/ros_tank_gazebo/
 
 RUN cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y 
 

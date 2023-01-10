@@ -1,0 +1,10 @@
+# ROS setup.bash
+source /opt/ros/melodic_noetic/setup.bash
+# Catkin setup.bash
+source ~/catkin_ws/devel/setup.bash
+# Find your IP address
+export ROS_IP=$(hostname -I | awk '{print $1;}')
+# Replace 10.0.1.20 with your turtlebot netbook's IP address
+export ROS_MASTER_URI=http://10.0.1.20:11311
+# ROS needs this sometimes; just in case
+export ROS_HOSTNAME=$ROS_IP

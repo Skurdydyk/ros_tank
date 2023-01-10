@@ -1,0 +1,7 @@
+<?xml version='1.0' ?>
+<launch>
+    <include file="$(find-pkg-share ros_tank)/launch/empty_world.launch.py"/>
+    <include file="$(find-pkg-share ros_tank)/launch/rviz.launch.py"/>
+    <!-- Read robot_description and spawn in gazebo running sim -->
+    <include file="$(find-pkg-share ros_tank)/launch/spawn_robot.launch.py"/>
+</launch>
