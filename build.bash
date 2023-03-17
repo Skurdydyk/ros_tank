@@ -1,1 +1,1 @@
-docker build -t ros_tank_project_galactic .
+docker build -t ros_tank_project_humble .

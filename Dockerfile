@@ -14,13 +14,9 @@ RUN apt-get update && apt-get install -y \
     less \
     xterm 
 
-RUN mkdir -p ros2_ws/src && \
-    cd ros2_ws/src 
-    # && \
-    # git clone https://github.com/ros-controls/ros2_control_demos.git -b galactic && \
-    # vcs import --input ros2_control_demos/ros2_control_demos.galactic.repos
+RUN mkdir -p ros2_ws/src && cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y 
 
-RUN cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y 
+WORKDIR /ros2_ws/
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
