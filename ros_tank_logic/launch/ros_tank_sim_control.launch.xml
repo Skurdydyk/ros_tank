@@ -1,0 +1,9 @@
+<?xml version='1.0' ?>
+<launch>
+  <!-- Spawn world in gazebo running sim -->
+  <include file="$(find-pkg-share ros_tank_gazebo)/launch/start_world.launch.py"/>
+  <!-- Publish URDF file in robot_description topic and launch rviz -->
+  <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_rviz.launch.py"/>
+  <!-- Read robot_description and spawn in gazebo running sim -->
+  <include file="$(find-pkg-share ros_tank_gazebo)/launch/spawn_robot.launch.py"/>
+</launch>

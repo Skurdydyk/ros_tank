@@ -10,8 +10,10 @@ docker run -it --rm \
     --volume="/tmp/.docker.xauth:/tmp/.docker.xauth" \
     --volume="$WS_DIR_PATH/ros_tank_logic:/ros2_ws/src/ros_tank_logic" \
     --volume="$WS_DIR_PATH/ros_tank_gazebo:/ros2_ws/src/ros_tank_gazebo" \
+    --volume="$WS_DIR_PATH/ros_tank_control:/ros2_ws/src/ros_tank_control" \
     --volume="$WS_DIR_PATH/ros_tank_navigation:/ros2_ws/src/ros_tank_navigation" \
     --volume="$WS_DIR_PATH/ros_tank_description:/ros2_ws/src/ros_tank_description" \
+    --volume="$WS_DIR_PATH/ros_tank_hardware_interface:/ros2_ws/src/ros_tank_hardware_interface" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=0" \
     --env="XAUTHORITY=/tmp/.docker.xauth" \

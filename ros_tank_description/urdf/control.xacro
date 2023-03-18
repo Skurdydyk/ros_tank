@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot>
+    <ros2_control name="MyRobotSystem" type="system">
+
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="camera_servo_first_joint">
+            <command_interface name="position">
+            <param name="min">-1.15</param>
+            <param name="max">1.4</param>
+            </command_interface>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="camera_servo_second_joint">
+            <command_interface name="position">
+            <param name="min">-1.15</param>
+            <param name="max">1.4</param>
+            </command_interface>
+            <state_interface name="position"/>
+        </joint>
+
+    </ros2_control>
+
+    <!-- Gazebo's ros2_control plugin -->
+    <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+        <parameters>$(find ros_tank_control)/config/ros_tank_controllers.yaml</parameters>
+    </plugin>
+    </gazebo>
+</robot>

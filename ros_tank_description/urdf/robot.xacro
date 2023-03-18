@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="ros_tank" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find ros_tank_description)/urdf/gazebo.xacro" />
+    <xacro:include filename="$(find ros_tank_description)/urdf/control.xacro" />
 
     <link name="base_link"></link>
     
@@ -88,7 +89,7 @@
                 <!-- <box size="0.02 0.03 0.03" /> -->
                 <mesh filename="package://ros_tank_description/meshes/camera_servo_2.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
             </geometry>
-            <material name="Gazebo/DarkGrey" />
+            <!-- <material name="Gazebo/DarkGrey" /> -->
         </visual>
 
         <collision>
@@ -122,7 +123,7 @@
                 <mesh filename="package://ros_tank_description/meshes/camera_servo_1.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
                 <!-- <box size="0.03 0.04 0.05" /> -->
             </geometry>
-            <material name="Gazebo/Orange" />
+            <!-- <material name="Gazebo/Orange" /> -->
         </visual>
 
         <collision>
@@ -197,7 +198,6 @@
             <geometry>
             <cylinder length="0.001" radius="0.015"/>
             </geometry>
-            <material name="red"/>
         </visual>
 
         <collision>
@@ -231,7 +231,6 @@
             <geometry>
             <cylinder length="0.001" radius="0.015"/>
             </geometry>
-            <material name="green"/>
         </visual>
 
         <collision>
