@@ -46,7 +46,7 @@
     </gazebo>
 
     <!-- JOINT PUBLISHER -->
-    <gazebo>
+    <!-- <gazebo>
         <plugin name="ros_tank_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
             <ros>
                 <remapping>~/out:=joint_states</remapping>
@@ -57,7 +57,7 @@
             <joint_name>joint_left_wheel</joint_name>
             <joint_name>joint_right_wheel</joint_name>
         </plugin>
-    </gazebo>
+    </gazebo> -->
 
     <!-- Differential drive -->
     <gazebo>
@@ -78,6 +78,14 @@
             <robot_base_frame>base_link</robot_base_frame>
         </plugin>
     </gazebo>
+
+    <!-- Gazebo's ros2_control plugin -->
+    <!-- <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+            <parameters>$(find ros_tank_control)/config/ros_tank_controllers.yaml</parameters>
+        </plugin>
+    </gazebo> -->
 
     <!-- Pointcloud plugin -->
     <gazebo reference="pointcloud_link">

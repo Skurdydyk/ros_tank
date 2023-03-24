@@ -13,6 +13,8 @@ docker run -it --rm \
     --volume="$WS_DIR_PATH/ros_tank_control:/ros2_ws/src/ros_tank_control" \
     --volume="$WS_DIR_PATH/ros_tank_navigation:/ros2_ws/src/ros_tank_navigation" \
     --volume="$WS_DIR_PATH/ros_tank_description:/ros2_ws/src/ros_tank_description" \
+    --volume="$WS_DIR_PATH/diffdrive_arduino:/ros2_ws/src/diffdrive_arduino" \
+    --volume="$WS_DIR_PATH/serial:/ros2_ws/src/serial" \
     --volume="$WS_DIR_PATH/ros_tank_hardware_interface:/ros2_ws/src/ros_tank_hardware_interface" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=0" \

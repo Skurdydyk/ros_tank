@@ -10,9 +10,9 @@ from launch.actions import ExecuteProcess
 def generate_launch_description():
 
     ####### DATA INPUT ##########
-    urdf_file = 'robot.xacro'
-    #xacro_file = "box_bot.xacro"
+    urdf_file = 'robot_sim.xacro'
     package_description = "ros_tank_description"
+    package_rviz = "ros_tank_logic"
 
     ####### DATA INPUT END ##########
     print("Fetching URDF ==>")
@@ -29,7 +29,7 @@ def generate_launch_description():
     )
 
     # RVIZ Configuration
-    rviz_config_dir = os.path.join(get_package_share_directory(package_description), "rviz", "robot.rviz")
+    rviz_config_dir = os.path.join(get_package_share_directory(package_rviz), "rviz", "robot.rviz")
 
     rviz_node = Node(
             package='rviz2',

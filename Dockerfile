@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     less \
     xterm 
 
-RUN mkdir -p ros2_ws/src && cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y 
+RUN mkdir -p ros2_ws/src && cd ros2_ws && rosdep install --from-paths src --ignore-src -r -y && colcon build
 
 WORKDIR /ros2_ws/
 

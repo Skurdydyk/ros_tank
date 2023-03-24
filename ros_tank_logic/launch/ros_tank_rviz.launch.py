@@ -9,8 +9,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     ####### DATA INPUT ##########
-    urdf_file = 'robot.xacro'
-    #xacro_file = "box_bot.xacro"
+    urdf_file = 'robot_sim.xacro'
     package_description = "ros_tank_description"
     package_rviz = "ros_tank_logic"
 

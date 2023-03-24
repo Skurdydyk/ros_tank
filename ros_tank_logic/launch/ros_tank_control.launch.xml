@@ -1,0 +1,5 @@
+<?xml version='1.0' ?>
+<launch>
+  <!-- Publish URDF file in robot_description topic and launch rviz -->
+  <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_rviz.launch.py"/>
+</launch>

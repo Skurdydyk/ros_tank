@@ -3,7 +3,9 @@
   <!-- Spawn world in gazebo running sim -->
   <include file="$(find-pkg-share ros_tank_gazebo)/launch/start_world.launch.py"/>
   <!-- Publish URDF file in robot_description topic and launch rviz -->
-  <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_rviz_sim.launch.py"/>
+  <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_rviz_publisher_gui.launch.py"/>
   <!-- Read robot_description and spawn in gazebo running sim -->
   <include file="$(find-pkg-share ros_tank_gazebo)/launch/spawn_robot.launch.py"/>
+
+  <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/> -->
 </launch>

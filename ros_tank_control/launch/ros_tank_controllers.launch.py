@@ -26,7 +26,8 @@ def generate_launch_description():
         [
             FindPackageShare("ros_tank_control"),
             "config",
-            "ros_tank_controllers.yaml",
+            # "ros_tank_controllers.yaml",
+            "diff_drive_controllers.yaml",
         ]
     )
 
@@ -50,6 +51,12 @@ def generate_launch_description():
         arguments=["forward_position_controller", "-c", "/controller_manager"],
     )
 
+    robot_diff_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diffbot_base_controller", "-c", "/controller_manager"],
+    )
+
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -59,6 +66,7 @@ def generate_launch_description():
     return LaunchDescription([
         control_node,
         robot_controller_spawner,
+        robot_diff_controller_spawner,
         robot_state_pub_node,
         joint_state_broadcaster_spawner
     ])
