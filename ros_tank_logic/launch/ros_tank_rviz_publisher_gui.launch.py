@@ -38,16 +38,10 @@ def generate_launch_description():
             name='rviz_node',
             parameters=[{'use_sim_time': True}],
             arguments=['-d', rviz_config_dir])
-
-    joint_state_publisher_gui = ExecuteProcess(
-        cmd=['ros2', 'run', 'joint_state_publisher_gui', 'joint_state_publisher_gui'],
-        output='screen'
-    )
     
     # create and return launch description object
     return LaunchDescription(
         [               
-            joint_state_publisher_gui,
             robot_state_publisher_node,
             rviz_node
         ]
