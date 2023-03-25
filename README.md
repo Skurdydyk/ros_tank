@@ -26,11 +26,10 @@ ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 <!-- Spawn world in gazebo running sim -->
 - ros2 launch ros_tank_gazebo start_world.launch.py
 <!-- Publish URDF file in robot_description topic and launch rviz -->
-- ros2 launch ros_tank_logic ros_tank_rviz_publisher_gui.launch.py
+- ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 <!-- Read robot_description and spawn in gazebo running sim -->
 - ros2 launch ros_tank_gazebo spawn_robot.launch.py
 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
-

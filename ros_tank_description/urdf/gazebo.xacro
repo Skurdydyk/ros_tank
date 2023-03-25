@@ -82,14 +82,6 @@
         </plugin>
     </gazebo>
 
-    <!-- Gazebo's ros2_control plugin -->
-    <!-- <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
-            <parameters>$(find ros_tank_control)/config/ros_tank_controllers.yaml</parameters>
-        </plugin>
-    </gazebo> -->
-
     <!-- Pointcloud plugin -->
     <gazebo reference="pointcloud_link">
         <sensor type="ray" name="pointcloud_sensor">

@@ -2,4 +2,5 @@
 <robot name="ros_tank" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find ros_tank_description)/urdf/base_urdf.xacro" />
     <xacro:include filename="$(find ros_tank_description)/urdf/gazebo.xacro" />
+    <xacro:include filename="$(find ros_tank_description)/urdf/control.xacro" />
 </robot>
