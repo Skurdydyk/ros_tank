@@ -153,3 +153,7 @@ joint_state_publisher_gui = ExecuteProcess(
     cmd=['ros2', 'run', 'joint_state_publisher_gui', 'joint_state_publisher_gui'],
     output='screen'
 )
+
+robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
+
+git clone https://github.com/ros-teleop/twist_mux.git

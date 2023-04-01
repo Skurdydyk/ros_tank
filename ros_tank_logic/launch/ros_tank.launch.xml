@@ -2,4 +2,6 @@
 <launch>
   <!-- Publish URDF file in robot_description topic and launch rviz -->
   <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_rviz.launch.py"/>
+  <!-- Run joint state broadcaster and forward position controller -->
+  <include file="$(find-pkg-share ros_tank_control)/launch/ros_tank_control_diff.launch.py"/>
 </launch>

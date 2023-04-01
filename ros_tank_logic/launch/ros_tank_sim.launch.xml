@@ -7,6 +7,6 @@
   <!-- Read robot_description and spawn in gazebo running sim -->
   <include file="$(find-pkg-share ros_tank_gazebo)/launch/spawn_robot.launch.py"/>
   <!-- Run joint state broadcaster and forward position controller -->
-  <include file="$(find-pkg-share ros_tank_logic)/launch/ros_tank_control.launch.py"/>
+  <include file="$(find-pkg-share ros_tank_control)/launch/ros_tank_control.launch.py"/>
   <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/> -->
 </launch>
