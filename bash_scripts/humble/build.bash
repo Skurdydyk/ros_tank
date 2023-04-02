@@ -1,1 +1,0 @@
-docker build -t ros_tank_humble ./docker/dockerfile_humble

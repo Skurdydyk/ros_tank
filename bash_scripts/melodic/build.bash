@@ -1,1 +1,0 @@
-docker build -t ros_tank_melodic ./docker/dockerfile_melodic

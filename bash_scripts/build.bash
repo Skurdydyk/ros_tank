@@ -1,0 +1,1 @@
+docker build -t ros_tank ./docker/ros_tank
