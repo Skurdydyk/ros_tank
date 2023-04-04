@@ -17,9 +17,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 ENV XAUTHORITY="/tmp/.docker.xauth" \
     net=host
     
-RUN mkdir -p ros2_ws/src &&  \
-    cd ros2_ws/src && \
-    git clone -b galactic https://github.com/Buzzology/diffdrive_arduino.git 
+RUN mkdir -p ros2_ws/src
 
 WORKDIR /ros2_ws/
 
