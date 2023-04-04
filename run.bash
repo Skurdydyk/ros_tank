@@ -6,6 +6,7 @@ WS_DIR_PATH=$(realpath "$SCRIPT_DIR_PATH")
 
 docker run -it --rm \
     --privileged \
+    --device="/dev/ttyUSB0" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
     --volume="/tmp/.docker.xauth:/tmp/.docker.xauth" \
     --volume="$WS_DIR_PATH/ros_tank_logic:/ros2_ws/src/ros_tank_logic" \
