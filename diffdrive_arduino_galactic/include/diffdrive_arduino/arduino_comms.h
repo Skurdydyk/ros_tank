@@ -28,8 +28,8 @@ public:
   // std::string sendMsg(const std::string &msg_to_send, bool print_output = false);
   void sendMsg(const std::string &msg_to_send, bool print_output = false);
 
-
 private:
+  rclcpp::Logger logger_ = rclcpp::get_logger("DiffDriveArduino");
   serial::Serial serial_conn_;  ///< Underlying serial connection 
 };
 
