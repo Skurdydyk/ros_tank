@@ -6,7 +6,8 @@
                 <param name="left_wheel_name">joint_left_wheel</param>
                 <param name="right_wheel_name">joint_right_wheel</param>
                 <param name="loop_rate">30</param>
-                <param name="device">/dev/ttyUSB0</param>
+                <!-- <param name="device">/dev/ttyUSB0</param> -->
+                <param name="device">/dev/ttyACM0</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout">1000</param>
                 <param name="enc_counts_per_rev">3436</param>
