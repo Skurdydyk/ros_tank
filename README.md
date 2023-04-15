@@ -31,7 +31,11 @@ ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 - ros2 launch ros_tank_gazebo spawn_robot.launch.py
 
 ros2 launch ros_tank_logic ros_tank.launch.xml
+
+ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 ros2 launch ros_tank_control ros_tank_control_diff.launch.py
+
+
 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
