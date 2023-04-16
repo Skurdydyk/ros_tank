@@ -1,12 +1,11 @@
-# This is an auto generated Dockerfile for ros:desktop
-# generated from docker_images_ros2/create_ros_image.Dockerfile.em
 FROM ros:humble
 
-# install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-${ROS_DISTRO}-ros2-control \
     ros-${ROS_DISTRO}-hardware-interface \
+    ros-${ROS_DISTRO}-joint-state-publisher-gui \
     ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-ros2-controllers \
     python-is-python3 \
     git \
     vim \

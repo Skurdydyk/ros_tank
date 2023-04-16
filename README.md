@@ -19,6 +19,7 @@ Command to check available lidar:
 ls -l /dev |grep ttyUSB
 
 sudo chmod 666 /dev/ttyUSB0
+sudo chmod 666 /dev/ttyACM0
 
 Commands for starting the project:
 
