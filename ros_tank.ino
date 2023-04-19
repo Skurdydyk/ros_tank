@@ -85,6 +85,16 @@ void loop() {
         Serial.print(", Value 2: ");
         Serial.println(value2);
           
+        // Check and update value1
+        if (value1 < -255 || value1 > 255) {
+          value1 = min(max(value1, -255), 255);
+        }
+        
+        // Check and update value2
+        if (value2 < -255 || value2 > 255) {
+          value2 = min(max(value2, -255), 255);
+        }
+        
         if (value1 > 0 and value2 > 0){
           Serial.println("Move Forward");
           advance (value1, value2);
