@@ -136,7 +136,7 @@ return_type DiffDriveArduino::write(const rclcpp::Time & /* time */, const rclcp
   new_value_r = r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate;
 
   if(new_value_l != old_value_l and new_value_r != old_value_r){
-    arduino_.setMotorValues(value_l, value_r);
+    arduino_.setMotorValues(new_value_l, new_value_r);
 
     old_value_l = new_value_l;
     old_value_r = new_value_r;
