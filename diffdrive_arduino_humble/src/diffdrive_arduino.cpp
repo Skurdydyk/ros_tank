@@ -76,9 +76,10 @@ CallbackReturn DiffDriveArduino::on_activate(const rclcpp_lifecycle::State & /* 
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
   arduino_.sendEmptyMsg();
+  
   // arduino.setPidValues(9,7,0,100);
   // arduino.setPidValues(14,7,0,100);
-  arduino_.setPidValues(30, 20, 0, 100);
+  // arduino_.setPidValues(30, 20, 0, 100);
 
   return CallbackReturn::SUCCESS;
 }
@@ -117,12 +118,10 @@ return_type DiffDriveArduino::read(const rclcpp::Time & /* time */, const rclcpp
   // r_wheel_.pos = r_wheel_.calcEncAngle();
   // r_wheel_.vel = (r_wheel_.pos - pos_prev) / deltaSeconds;
 
-    // RCLCPP_INFO_STREAM(logger_,"Read: ");
+  // RCLCPP_INFO_STREAM(logger_,"Read: ");
 
 
   return return_type::OK;
-
-  
 }
 
 return_type DiffDriveArduino::write(const rclcpp::Time & /* time */, const rclcpp::Duration & /* period */)
@@ -135,9 +134,7 @@ return_type DiffDriveArduino::write(const rclcpp::Time & /* time */, const rclcp
 
   arduino_.setMotorValues(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate);
 
-
   return return_type::OK;
-
 }
 
 } // namespace diffdrive_arduino
