@@ -52,7 +52,7 @@ private:
   int old_value_r = 0;
 
   int new_value_l = 0;
-  int new_value_l = 0;
+  int new_value_r = 0;
 
   Wheel l_wheel_;
   Wheel r_wheel_;
