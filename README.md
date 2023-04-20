@@ -51,3 +51,5 @@ ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 
 
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
+ros2 run usb_cam usb_cam_node_exe --ros-args --params-file /ros2_ws/src/ros_tank_description/config/camera-params.yaml
