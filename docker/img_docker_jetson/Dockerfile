@@ -27,6 +27,7 @@ RUN mkdir -p ros2_ws/src && \
 
 COPY ./ros2_ws/ros_tank_control ros2_ws/src/ros_tank_control
 COPY ./ros2_ws/ros_tank_description ros2_ws/src/ros_tank_description
+COPY ./ros2_ws/diffdrive_arduino ros2_ws/src/diffdrive_arduino
 COPY ./ros2_ws/serial ros2_ws/src/serial
 
 # Build the ROS workspace using colcon build

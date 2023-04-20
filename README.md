@@ -22,16 +22,19 @@ sudo chmod 666 /dev/ttyUSB0 or /dev/ttyACM0
 
 Commands for starting the project:
 
-1. terminal jetson nano
-cd ros_tank 
+1. download file - arduino/ros_tank.ino to arduino
+
+
+2. terminal jetson nano
 ./run_jetson.bash
+cd ros_tank 
 ros2 launch ros_tank_control ros_tank_control_diff.launch.py
 
-2. terminal PC
+3. terminal PC
 ./run.bash
 ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 
-3. terminal PC
+4. terminal PC
 ./exec.bash 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
 
