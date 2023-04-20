@@ -44,11 +44,11 @@ ros2 run joint_state_publisher_gui joint_state_publisher_gui
 1 terminal, jetson nano
 cd ros_tank 
 ./run_jetson.bash
-colcon build && . install/setup.bash && ros2 launch ros_tank_control ros_tank_control_diff.launch.py
+ros2 launch ros_tank_control ros_tank_control_diff.launch.py
 
 2 terminal, PC
 ./run.bash
-colcon build && . install/setup.bash && ros2 launch ros_tank_logic ros_tank_rviz.launch.py
+ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 
 3 terminal, PC
 ./exec.bash 

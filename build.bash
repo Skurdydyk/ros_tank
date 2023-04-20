@@ -1,1 +1,1 @@
-docker build -t ros_tank ./docker/ros_tank
+docker build -t ros_tank -f ./docker/ros_tank/Dockerfile . 
