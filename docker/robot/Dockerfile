@@ -9,6 +9,7 @@ RUN apt-get update && \
     iputils-ping \
     python-is-python3 \
     ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-usb-cam \
     ros-${ROS_DISTRO}-ros2-control \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-hardware-interface \
