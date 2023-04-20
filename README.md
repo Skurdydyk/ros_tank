@@ -18,10 +18,25 @@ Then change value param for tank launcher:
 Command to check available lidar:
 ls -l /dev |grep ttyUSB
 
-sudo chmod 666 /dev/ttyUSB0
-sudo chmod 666 /dev/ttyACM0
+sudo chmod 666 /dev/ttyUSB0 or /dev/ttyACM0
 
 Commands for starting the project:
+
+1. terminal jetson nano
+cd ros_tank 
+./run_jetson.bash
+ros2 launch ros_tank_control ros_tank_control_diff.launch.py
+
+2. terminal PC
+./run.bash
+ros2 launch ros_tank_logic ros_tank_rviz.launch.py
+
+3. terminal PC
+./exec.bash 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
+
+
+For simulation:
 
 ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 <!-- Spawn world in gazebo running sim -->
@@ -31,25 +46,5 @@ ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 <!-- Read robot_description and spawn in gazebo running sim -->
 - ros2 launch ros_tank_gazebo spawn_robot.launch.py
 
-ros2 launch ros_tank_logic ros_tank.launch.xml
-
-ros2 launch ros_tank_logic ros_tank_rviz.launch.py
-ros2 launch ros_tank_control ros_tank_control_diff.launch.py
-
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
-ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
 
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
-
-1 terminal, jetson nano
-cd ros_tank 
-./run_jetson.bash
-ros2 launch ros_tank_control ros_tank_control_diff.launch.py
-
-2 terminal, PC
-./run.bash
-ros2 launch ros_tank_logic ros_tank_rviz.launch.py
-
-3 terminal, PC
-./exec.bash 
-. install/setup.bash && ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
