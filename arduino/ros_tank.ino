@@ -105,11 +105,11 @@ void loop() {
         }
         else if (value1 > 0 and value2 <= 0){
           Serial.println("Turn Right");
-          turn_R (value1, value2);
+          turn_R (value1, -value2);
         }
         else if (value1 <= 0 and value2 > 0){
           Serial.println("Turn Left");
-          turn_L (value1, value2);
+          turn_L (-value1, value2);
         }
         else if (value1 == 0 and value2 == 0){
           Serial.println("Stop");
