@@ -2,4 +2,4 @@
 xhost -local:root
 
 # This is a comment
-docker exec -it ros_tank_jetson bash
+docker exec -it ros_tank_jetson_container bash
