@@ -60,6 +60,8 @@ ros2 launch rplidar_ros rplidar.launch.py
 ros2 launch ros_tank_navigation rplidar.launch.py
 ros2 launch ros_tank_navigation camera.launch.py
 
+ros2 launch ros_tank_control ros_tank.xml
+
 checking camera:
 sudo apt-get install v4l-utils
 v4l2-ctl --list-devices
