@@ -7,6 +7,7 @@ WS_DIR_PATH=$(realpath "$SCRIPT_DIR_PATH")
 docker run -it --rm \
     --privileged \
     --device="/dev/ttyACM0" \
+    --device="/dev/ttyUSB0" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
     --volume="/tmp/.docker.xauth:/tmp/.docker.xauth" \
     --volume="$WS_DIR_PATH/ros2_ws/ros_tank_control:/ros2_ws/src/ros_tank_control" \
