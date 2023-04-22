@@ -50,8 +50,15 @@ ros2 launch ros_tank_logic ros_tank_sim.launch.xml
 - ros2 launch ros_tank_gazebo spawn_robot.launch.py
 
 
+run joint state publisher node:
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
 
-ros2 run usb_cam usb_cam_node_exe --ros-args --params-file /ros2_ws/src/ros_tank_description/config/camera-params.yam
+run lidar node:
+ros2 launch rplidar_ros view_rplidar.launch.py 
+
+checking camera:
 sudo apt-get install v4l-utils
 v4l2-ctl --list-devices
+
+run camera node:
+ros2 run usb_cam usb_cam_node_exe --ros-args --params-file /ros2_ws/src/ros_tank_description/config/camera-params.yaml

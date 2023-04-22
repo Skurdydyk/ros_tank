@@ -8,9 +8,10 @@ RUN apt-get update && \
     xterm \
     iputils-ping \
     python-is-python3 \
+    ros-${ROS_DISTRO}-usb-cam \
     ros-${ROS_DISTRO}-gazebo-* \
-    ros-${ROS_DISTRO}-joint-state-publisher-gui \
-    ros-${ROS_DISTRO}-usb-cam
+    ros-${ROS_DISTRO}-rplidar-ros \
+    ros-${ROS_DISTRO}-joint-state-publisher-gui
 
 RUN mkdir -p ros2_ws/src && cd ros2_ws && \
     rosdep install --from-paths src --ignore-src -r -y && \

@@ -36,7 +36,7 @@
 
     <!-- Joint - laser scan -->
     <joint name="joint_laser_scan_chassis" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.01 0 0.11" />
+        <origin rpy="0 0 3.2" xyz="-0.01 0 0.11" />
         <child link="link_laser_scan" />
         <parent link="link_chassis" />
         <joint_properties damping="1.0" friction="1.0" />
