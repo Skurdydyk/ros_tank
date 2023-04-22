@@ -35,8 +35,9 @@ COPY ./ros2_ws/ros_tank_description ros2_ws/src/ros_tank_description
 
 # Build the ROS workspace using colcon build
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
-    cd ros2_ws && \
-    colcon build
+    cd ros2_ws 
+    # && \
+    # colcon build
 
 # Source the ROS workspace
 RUN echo "source /ros2_ws/install/setup.bash" >> /root/.bashrc

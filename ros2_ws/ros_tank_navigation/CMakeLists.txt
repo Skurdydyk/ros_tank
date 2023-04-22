@@ -7,7 +7,6 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(ros_tank_logic REQUIRED)
 find_package(ros_tank_description REQUIRED)
 
 if(BUILD_TESTING)
