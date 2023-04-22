@@ -1,0 +1,9 @@
+<?xml version='1.0' ?>
+<launch>
+  <!-- Run joint state broadcaster and forward position controller -->
+  <include file="$(find-pkg-share ros_tank_control)/launch/ros_tank_control_diff.launch.py"/>
+  <!-- Run joint state broadcaster and forward position controller -->
+  <include file="$(find-pkg-share ros_tank_navigation)/launch/camera.launch.py"/>
+  <!-- Run joint state broadcaster and forward position controller -->
+  <include file="$(find-pkg-share ros_tank_navigation)/launch/rplidar.launch.py"/>
+</launch>
