@@ -14,7 +14,8 @@ RUN apt-get update && \
     ros-${ROS_DISTRO}-ros2-controllers \
     ros-${ROS_DISTRO}-hardware-interface \
     ros-${ROS_DISTRO}-joint-state-publisher-gui \
-    ros-${ROS_DISTRO}-rplidar-ros
+    ros-${ROS_DISTRO}-rplidar-ros \
+    ros-${ROS_DISTRO}-navigation2
 
 RUN sudo apt install build-essential -y \
     libboost-test-dev \
