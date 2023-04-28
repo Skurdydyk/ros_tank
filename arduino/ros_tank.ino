@@ -1,10 +1,14 @@
 // example code: https://wiki.dfrobot.com/Romeo_V2-All_in_one_Controller__R3___SKU_DFR0225
+#include <Servo.h>
 
 //Standard PWM DC control
 int E1 = 5;     //M1 Speed Control
 int E2 = 6;     //M2 Speed Control
 int M1 = 4;    //M1 Direction Control
 int M2 = 7;    //M1 Direction Control
+
+Servo servo_1;
+Servo servo_2;
 
 ///For previous Romeo, please use these pins.
 //int E1 = 6;     //M1 Speed Control
@@ -52,8 +56,14 @@ void turn_R (char a, char b){
 
 void setup(void){
   int i;
-  for(i=4;i<=7;i++)
+  
+  for(i=4;i<=7;i++){
     pinMode(i, OUTPUT);
+  }
+  
+  servo_1.attach(0);
+  servo_2.attach(1);
+  
   Serial.begin(9600);      //Set Baud Rate
   Serial.println("Run keyboard control");
 }
@@ -116,6 +126,18 @@ void loop() {
           stop();
         }
       } 
+      else if(command == 's'){
+        Serial.print("Command: ");
+        Serial.print(command);
+        
+        Serial.print(", Value 1: ");
+        Serial.print(value1);
+        
+        Serial.print(", Value 2: ");
+        Serial.println(value2);
+        
+        servo_1.write(value1);
+      }
       else {
         Serial.println("Invalid command. Please enter 'm' as the command.");
       }
