@@ -75,11 +75,8 @@ std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_comma
 CallbackReturn DiffDriveArduino::on_activate(const rclcpp_lifecycle::State & /* previous_state */)
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
+
   arduino_.sendEmptyMsg();
-  
-  // arduino.setPidValues(9,7,0,100);
-  // arduino.setPidValues(14,7,0,100);
-  // arduino_.setPidValues(30, 20, 0, 100);
 
   return CallbackReturn::SUCCESS;
 }
@@ -108,18 +105,7 @@ return_type DiffDriveArduino::read(const rclcpp::Time & /* time */, const rclcpp
     return return_type::ERROR;
   }
 
-  // arduino_.readEncoderValues(l_wheel_.enc, r_wheel_.enc);
-
-  // double pos_prev = l_wheel_.pos;
-  // l_wheel_.pos = l_wheel_.calcEncAngle();
-  // l_wheel_.vel = (l_wheel_.pos - pos_prev) / deltaSeconds;
-
-  // pos_prev = r_wheel_.pos;
-  // r_wheel_.pos = r_wheel_.calcEncAngle();
-  // r_wheel_.vel = (r_wheel_.pos - pos_prev) / deltaSeconds;
-
   // RCLCPP_INFO_STREAM(logger_,"Read: ");
-
 
   return return_type::OK;
 }
@@ -131,6 +117,8 @@ return_type DiffDriveArduino::write(const rclcpp::Time & /* time */, const rclcp
   {
     return return_type::ERROR;
   }
+
+  RCLCPP_INFO_STREAM(logger_, "Read: " << l_wheel_.cmd << " " << r_wheel_.cmd);
 
   new_value_l = l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate;
   new_value_r = r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate;
