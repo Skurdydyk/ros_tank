@@ -45,7 +45,7 @@
     <!-- Link - laser scan -->
     <link name="link_laser_scan">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 3.1" />
             <geometry>
                 <mesh filename="package://ros_tank_description/meshes/lidarA1.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
                 <!-- <cylinder radius="0.04" length="0.04"/> -->
@@ -146,4 +146,92 @@
         </inertial>
     </link>
 
+     <!-- Joint - camera second servo -->
+    <joint name="camera_servo_second_joint" type="revolute">
+        <origin xyz="0.03 -0.005 0.02" rpy="0 0 0"/>
+        <parent link="camera_servo_first_link"/>
+        <child link="camera_second_servo_link"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.15" upper="1.4" velocity="100" effort="100"/>
+    </joint>
+
+    <!-- Link - camera second servo -->
+    <link name="camera_second_servo_link">
+        <collision>
+            <origin xyz="0 0 0.01" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.03 0.03" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <!-- <box size="0.02 0.03 0.03" /> -->
+                <mesh filename="package://ros_tank_description/meshes/camera_servo_2.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+            <mass value="0.05"/>
+            <inertia ixx="1.531666666666667e-05" ixy="0" ixz="0" iyy="1.531666666666667e-05" iyz="0" izz="3.0625000000000006e-05"/>
+        </inertial>
+    </link>
+
+     <!-- Joint - camera first servo -->
+    <joint name="camera_servo_first_joint" type="revolute">
+        <origin xyz="0.053 0 0" rpy="0 0 0"/>
+        <parent link="link_chassis"/>
+        <child link="camera_servo_first_link"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.15" upper="1.4" velocity="100" effort="100"/>
+    </joint>
+
+    <!-- Link - camera first servo -->
+    <link name="camera_servo_first_link">
+        <collision>
+            <origin xyz="0 0 -0.005" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.03 0.04 0.03" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://ros_tank_description/meshes/camera_servo_1.stl" pose="0 0 0" scale="0.0011 0.00111 0.0011"/>
+                <!-- <box size="0.03 0.04 0.05" />-->
+            </geometry>
+        </visual>
+        <inertial>
+            <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+            <mass value="0.05"/>
+            <inertia ixx="1.531666666666667e-05" ixy="0" ixz="0" iyy="1.531666666666667e-05" iyz="0" izz="3.0625000000000006e-05"/>
+        </inertial>
+    </link>
+
+    <!-- Camera -->
+    <joint name="camera_joint" type="fixed">
+        <parent link="camera_second_servo_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0.03 0 0.017" rpy="0 0 0"/>
+    </joint>
+
+    <link name="camera_link">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.08 0.038"/>
+            </geometry>
+        </collision>
+        <visual>
+            <geometry>
+                <mesh filename="package://ros_tank_description/meshes/camera.stl" pose="0 0 0" scale="0.00111 0.00111 0.0011"/>
+                <!-- <box size="0.02 0.08 0.038"/>-->
+            </geometry>
+        </visual>
+        <inertial>
+            <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+            <mass value="0.05"/>
+            <inertia ixx="1.531666666666667e-05" ixy="0" ixz="0" iyy="1.531666666666667e-05" iyz="0" izz="3.0625000000000006e-05"/>
+        </inertial>
+    </link>
 </robot>

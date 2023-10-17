@@ -68,3 +68,12 @@ v4l2-ctl --list-devices
 
 run camera node:
 ros2 run usb_cam usb_cam_node_exe --ros-args --params-file /ros2_ws/src/ros_tank_description/config/camera-params.yaml
+
+
+ros2 topic pub --once /forward_position_controller/commands std_msgs/msg/Float64MultiArray "
+layout:
+ dim: []
+ data_offset: 0
+data:
+ - 0
+ - 0"
