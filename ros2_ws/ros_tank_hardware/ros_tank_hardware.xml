@@ -1,0 +1,9 @@
+<library path="ros_tank_hardware">
+  <class name="ros_tank_hardware/SystemPositionOnlyHardware"
+         type="ros_tank_hardware::SystemPositionOnlyHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ros2_control example using a system hardware interface-type.
+    </description>
+  </class>
+</library>
