@@ -7,35 +7,42 @@ from launch import LaunchDescription
 
 # this is the function launch  system will look for
 def generate_launch_description():
+    # Base Name or robot
+    robot_base_name = "ros_tank"
 
     # Position and orientation
     # [X, Y, Z]
     position = [0.0, 0.0, 0.2]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
-    # Base Name or robot
-    robot_base_name = "ros_tank"
 
     entity_name = robot_base_name + "-" + str(int(random.random() * 100000))
 
     # Spawn ROBOT Set Gazebo
     spawn_robot_node = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        name='spawn_entity',
-        output='screen',
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        name="spawn_entity",
+        output="screen",
         arguments=[
-            '-entity',
+            "-entity",
             entity_name,
-            '-x', str(position[0]), '-y', str(position[1]), '-z', str(position[2]),
-            '-R', str(orientation[0]), '-P', str(orientation[1]), '-Y', str(orientation[2]),
-            '-topic', '/robot_description'
-        ]
+            "-x",
+            str(position[0]),
+            "-y",
+            str(position[1]),
+            "-z",
+            str(position[2]),
+            "-R",
+            str(orientation[0]),
+            "-P",
+            str(orientation[1]),
+            "-Y",
+            str(orientation[2]),
+            "-topic",
+            "/robot_description",
+        ],
     )
 
     # create and return launch description object
-    return LaunchDescription(
-        [
-            spawn_robot_node,
-        ]
-    )
+    return LaunchDescription([spawn_robot_node])
