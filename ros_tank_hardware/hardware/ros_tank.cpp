@@ -21,7 +21,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_init(
     return hardware_interface::CallbackReturn::ERROR;
   }
 
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
   hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
   hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
@@ -75,7 +74,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_init(
 hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   RCLCPP_INFO(
     rclcpp::get_logger("SystemPositionOnlyHardware"), "Configuring ...please wait...");
 
@@ -86,7 +84,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_configure(
       rclcpp::get_logger("SystemPositionOnlyHardware"), "%.1f seconds left...",
       hw_start_sec_ - i);
   }
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   // reset values always when configuring hardware
   for (uint i = 0; i < hw_states_.size(); i++)
@@ -129,7 +126,6 @@ SystemPositionOnlyHardware::export_command_interfaces()
 hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   RCLCPP_INFO(
     rclcpp::get_logger("SystemPositionOnlyHardware"), "Activating ...please wait...");
 
@@ -140,7 +136,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_activate(
       rclcpp::get_logger("SystemPositionOnlyHardware"), "%.1f seconds left...",
       hw_start_sec_ - i);
   }
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   // command and state should be equal when starting
   for (uint i = 0; i < hw_states_.size(); i++)
@@ -156,7 +151,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_activate(
 hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   RCLCPP_INFO(
     rclcpp::get_logger("SystemPositionOnlyHardware"), "Deactivating ...please wait...");
 
@@ -169,7 +163,6 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_deactivate(
   }
 
   RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Successfully deactivated!");
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -177,19 +170,17 @@ hardware_interface::CallbackReturn SystemPositionOnlyHardware::on_deactivate(
 hardware_interface::return_type SystemPositionOnlyHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Reading...");
+//  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Reading...");
 
   for (uint i = 0; i < hw_states_.size(); i++)
   {
     // Simulate ros_tank movement
     hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / hw_slowdown_;
-    RCLCPP_INFO(
-      rclcpp::get_logger("SystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
-      hw_states_[i], i);
+//    RCLCPP_INFO(
+//      rclcpp::get_logger("SystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
+//      hw_states_[i], i);
   }
-  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Joints successfully read!");
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
+//  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Joints successfully read!");
 
   return hardware_interface::return_type::OK;
 }
@@ -197,19 +188,17 @@ hardware_interface::return_type SystemPositionOnlyHardware::read(
 hardware_interface::return_type SystemPositionOnlyHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Writing...");
+//  RCLCPP_INFO(rclcpp::get_logger("SystemPositionOnlyHardware"), "Writing...");
 
   for (uint i = 0; i < hw_commands_.size(); i++)
   {
     // Simulate sending commands to the hardware
-    RCLCPP_INFO(
-      rclcpp::get_logger("SystemPositionOnlyHardware"), "Got command %.5f for joint %d!",
-      hw_commands_[i], i);
+//    RCLCPP_INFO(
+//      rclcpp::get_logger("SystemPositionOnlyHardware"), "Got command %.5f for joint %d!",
+//      hw_commands_[i], i);
   }
-  RCLCPP_INFO(
-    rclcpp::get_logger("SystemPositionOnlyHardware"), "Joints successfully written!");
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
+//  RCLCPP_INFO(
+//    rclcpp::get_logger("SystemPositionOnlyHardware"), "Joints successfully written!");
 
   return hardware_interface::return_type::OK;
 }

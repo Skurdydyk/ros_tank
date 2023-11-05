@@ -6,6 +6,7 @@ RUN apt-get update && \
     vim \
     less \
     xterm \
+    nano \
     iputils-ping \
     python-is-python3 \
     ros-${ROS_DISTRO}-xacro \

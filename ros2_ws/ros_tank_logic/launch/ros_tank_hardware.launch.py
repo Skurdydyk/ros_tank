@@ -8,29 +8,34 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    urdf_file = "ros_tank.urdf.xacro"
+    urdf_file = "robot_hardware.xacro"
     rviz_file = "hardware.rviz"
-    package_hardware = "ros_tank_hardware"
+    rviz_package = "ros_tank_logic"
+    hardware_package = "ros_tank_description"
 
     # Get URDF via xacro
     robot_desc_path = PathJoinSubstitution(
-        [FindPackageShare("ros_tank_hardware"), "urdf", urdf_file]
+        [FindPackageShare(hardware_package), "urdf", urdf_file]
     )
 
     robot_description = {"robot_description": Command(["xacro ", robot_desc_path])}
 
-    robot_controllers = PathJoinSubstitution(
-        [FindPackageShare(package_hardware), "config", "ros_tank_controllers.yaml"]
+    robot_servo_controllers = PathJoinSubstitution(
+        [FindPackageShare("ros_tank_control"), "config", "servos_controller.yaml"]
+    )
+
+    robot_diff_controller = PathJoinSubstitution(
+        [FindPackageShare("ros_tank_control"), "config", "diff_drive_controller.yaml"]
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(package_hardware), "rviz", rviz_file]
+        [FindPackageShare(rviz_package), "rviz", rviz_file]
     )
 
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[robot_description, robot_servo_controllers, robot_diff_controller],
         output="both",
     )
 
@@ -57,6 +62,12 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
         ],
+    )
+
+    diff_drive_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_controller"],
     )
 
     robot_controller_spawner = Node(
@@ -87,6 +98,16 @@ def generate_launch_description():
         )
     )
 
+    # Delay start of robot_controller after `joint_state_broadcaster`
+    delay_robot_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner = (
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=joint_state_broadcaster_spawner,
+                on_exit=[diff_drive_spawner],
+            )
+        )
+    )
+
     return LaunchDescription(
         [
             control_node,
@@ -94,5 +115,6 @@ def generate_launch_description():
             joint_state_broadcaster_spawner,
             delay_rviz_after_joint_state_broadcaster_spawner,
             delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
+            delay_robot_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner,
         ]
     )

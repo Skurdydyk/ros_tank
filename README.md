@@ -9,34 +9,36 @@ Tank launch project packages:
 ![Selection_096](https://user-images.githubusercontent.com/23004657/209576988-321a2a82-18bd-4550-98bb-9a9118b5310c.png)
 
 
-Command to check available cameras:
-ls /dev | grep video*
-
 Then change value param for tank launcher:
 <param name="video_device" value="/dev/video4" />
-
-Command to check available lidar:
-ls -l /dev |grep ttyUSB
-
-sudo chmod 666 /dev/ttyUSB0 or /dev/ttyACM0
 
 Commands for starting the project:
 
 1. download file - arduino/ros_tank.ino to arduino
 
+2. Connect via ssh to jetson 
+   ssh name@192.168.0.140
+ exec following commands:
+   cd ros_tank
+   ./run_jetson.bash
+   ros2 launch ros_tank_control ros_tank_control_diff.launch.py
 
-2. terminal jetson nano
-./run_jetson.bash
-cd ros_tank 
-ros2 launch ros_tank_control ros_tank_control_diff.launch.py
+ Command to check:
+   available cameras:
+     ls /dev | grep video*
+   available lidar:
+     ls -l /dev |grep ttyUSB
+ 
+ lsusb - get list USB devices
+ sudo chmod 666 /dev/ttyUSB0 or /dev/ttyACM0
 
-3. terminal PC
+3. In PC terminal
 ./run.bash
 ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 
-4. terminal PC
+4. Another PC terminal 
 ./exec.bash 
-ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/diff_cont/cmd_vel_unstamped
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
 
 
 For simulation:
