@@ -1,138 +1,215 @@
-#include "diffdrive_arduino/diffdrive_arduino.h"
+#include "diffdrive_arduino/diffdrive_arduino.hpp"
 
+#include <chrono>
+#include <cmath>
+#include <limits>
+#include <memory>
+#include <vector>
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
-
 #include "rclcpp/rclcpp.hpp"
 
 namespace diffdrive_arduino
 {
 
-
 DiffDriveArduino::DiffDriveArduino()
-    : logger_(rclcpp::get_logger("DiffDriveArduino"))
-{}
+: logger_(rclcpp::get_logger("DiffDriveArduino"))
+{
+}
 
 CallbackReturn DiffDriveArduino::on_init(const hardware_interface::HardwareInfo & info)
 {
-  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
-{
-  return CallbackReturn::ERROR;
-}
+  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS) {
+    return CallbackReturn::ERROR;
+  }
 
-  RCLCPP_INFO(logger_, "Configuring...");
+  hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
+  hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
+  hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
 
-  time_ = std::chrono::system_clock::now();
-
-  cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
-  cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
-  cfg_.loop_rate = std::stof(info_.hardware_parameters["loop_rate"]);
-  cfg_.device = info_.hardware_parameters["device"];
-  cfg_.baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
-  cfg_.timeout = std::stoi(info_.hardware_parameters["timeout"]);
-  cfg_.enc_counts_per_rev = std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
-
-  // Set up the wheels
-  l_wheel_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
-  r_wheel_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
+  hw_device_ = info_.hardware_parameters["device"];
+  hw_baud_rate_ = stod(info_.hardware_parameters["baud_rate"]);
+  hw_timeout_ = stod(info_.hardware_parameters["timeout"]);
 
   // Set up the Arduino
-  arduino_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout);  
+  arduino_.setup(hw_device_, hw_baud_rate_, hw_timeout_);
 
-  RCLCPP_INFO(logger_, "Finished Configuration");
+  if (info_.joints.size() != 2) {
+    RCLCPP_ERROR(logger_, "Incorrect number of joints. 2 expected.");
+    return hardware_interface::CallbackReturn::ERROR;
+  }
+
+  static constexpr int NUMBER_OF_COMMAND_INTERFACES = 1;
+
+  for (uint i = 0; i < info_.joints.size(); i++) {
+    const auto & command_interfaces = info_.joints[i].command_interfaces;
+
+    if (command_interfaces.size() != NUMBER_OF_COMMAND_INTERFACES) {
+      RCLCPP_FATAL(
+        logger_,
+        "Joint '%s' has %zu command interfaces found. 1 expected.",
+        info_.joints[i].name.c_str(),
+        info_.joints[i].command_interfaces.size());
+      return hardware_interface::CallbackReturn::ERROR;
+    }
+
+    for (const auto & interface : command_interfaces) {
+      if (interface.name != hardware_interface::HW_IF_VELOCITY) {
+        RCLCPP_FATAL(
+          logger_,
+          "Joint '%s' has %s command interface. Expected %s.",
+          info_.joints[i].name.c_str(),
+          interface.name.c_str(),
+          hardware_interface::HW_IF_VELOCITY);
+        return hardware_interface::CallbackReturn::ERROR;
+      }
+    }
+  }
+
+  hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
 
   return CallbackReturn::SUCCESS;
 }
 
-std::vector<hardware_interface::StateInterface> DiffDriveArduino::export_state_interfaces()
+CallbackReturn DiffDriveArduino::on_configure(const rclcpp_lifecycle::State &previous_state)
 {
-  // We need to set up a position and a velocity interface for each wheel
+  // prevent unused variable warning
+  auto prev_state = previous_state;
+  RCLCPP_INFO(logger_, "Configuring ...please wait...");
 
+  for (int i = 0; i < hw_start_sec_; i++) {
+    rclcpp::sleep_for(std::chrono::seconds(1));
+    RCLCPP_INFO(logger_, "%.1f seconds left...", hw_start_sec_ - i);
+  }
+
+  // reset values always when configuring hardware
+  for (uint i = 0; i < hw_states_.size(); i++) {
+    hw_states_[i] = 0;
+    hw_commands_[i] = 0;
+  }
+
+  RCLCPP_INFO(logger_, "Successfully configured!");
+
+  return CallbackReturn::SUCCESS;
+}
+
+std::vector<hardware_interface::StateInterface>DiffDriveArduino::export_state_interfaces()
+{
   std::vector<hardware_interface::StateInterface> state_interfaces;
-
-  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_POSITION, &l_wheel_.pos));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_POSITION, &r_wheel_.pos));
+  for (uint i = 0; i < info_.joints.size(); i++) {
+    for (std::size_t j = 0; j < info_.joints[i].state_interfaces.size(); j++) {
+        state_interfaces.emplace_back(
+            hardware_interface::StateInterface(
+                info_.joints[i].name,
+                info_.joints[i].state_interfaces[j].name,
+                &hw_states_[j]
+            )
+        );
+    }
+  }
 
   return state_interfaces;
 }
 
-std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_command_interfaces()
+std::vector<hardware_interface::CommandInterface>DiffDriveArduino::export_command_interfaces()
 {
-  // We need to set up a velocity command interface for each wheel
-
   std::vector<hardware_interface::CommandInterface> command_interfaces;
-
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.cmd));
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.cmd));
+  for (uint i = 0; i < info_.joints.size(); i++) {
+    for (std::size_t j = 0; j < info_.joints[i].command_interfaces.size(); j++) {
+        command_interfaces.emplace_back(
+            hardware_interface::CommandInterface(
+                info_.joints[i].name,
+                info_.joints[i].command_interfaces[j].name,
+                &hw_commands_[i]
+            )
+        );
+    }
+  }
 
   return command_interfaces;
 }
 
-
-CallbackReturn DiffDriveArduino::on_activate(const rclcpp_lifecycle::State & /* previous_state */)
+CallbackReturn DiffDriveArduino::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  RCLCPP_INFO(logger_, "Starting Controller...");
+  RCLCPP_INFO(logger_, "Activating ...please wait...");
 
   arduino_.sendEmptyMsg();
 
+  for (int i = 0; i < hw_start_sec_; i++) {
+    rclcpp::sleep_for(std::chrono::seconds(1));
+    RCLCPP_INFO(logger_, "%.1f seconds left...", hw_start_sec_ - i);
+  }
+
+  // command and state should be equal when starting
+  for (uint i = 0; i < hw_states_.size(); i++) {
+    hw_commands_[i] = hw_states_[i];
+  }
+
+  RCLCPP_INFO(logger_, "Successfully activated!");
+
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn DiffDriveArduino::on_deactivate(const rclcpp_lifecycle::State & /* previous_state */)
+CallbackReturn DiffDriveArduino::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  RCLCPP_INFO(logger_, "Stopping Controller...");
+  RCLCPP_INFO(logger_, "Deactivating ...please wait...");
+
+  for (int i = 0; i < hw_stop_sec_; i++) {
+    rclcpp::sleep_for(std::chrono::seconds(1));
+    RCLCPP_INFO(logger_, "%.1f seconds left...", hw_stop_sec_ - i);
+  }
+
+  RCLCPP_INFO(logger_, "Successfully deactivated!");
 
   return CallbackReturn::SUCCESS;
 }
 
-return_type DiffDriveArduino::read(const rclcpp::Time & /* time */, const rclcpp::Duration & /* period */)
+hardware_interface::return_type DiffDriveArduino::read(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
-
-  // TODO fix chrono duration
-
-  // Calculate time delta
-  auto new_time = std::chrono::system_clock::now();
-  std::chrono::duration<double> diff = new_time - time_;
-  double deltaSeconds = diff.count();
-  time_ = new_time;
-
-
-  if (!arduino_.connected())
-  {
-    return return_type::ERROR;
+  if (!arduino_.connected()) {
+    return hardware_interface::return_type::ERROR;
   }
 
-  // RCLCPP_INFO_STREAM(logger_,"Read: ");
+//  RCLCPP_INFO(logger_, "Reading...");
 
-  return return_type::OK;
+//  for (uint i = 0; i < hw_states_.size(); i++) {
+    // Simulate RRBot's movement
+//    hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / hw_slowdown_;
+//    RCLCPP_INFO(logger_, "Got state %.5f for joint %d!", hw_states_[i], i);
+//  }
+
+//  RCLCPP_INFO(logger_, "Joints successfully read!");
+
+  return hardware_interface::return_type::OK;
 }
 
-return_type DiffDriveArduino::write(const rclcpp::Time & /* time */, const rclcpp::Duration & /* period */)
+hardware_interface::return_type DiffDriveArduino::write(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
-
-  if (!arduino_.connected())
-  {
-    return return_type::ERROR;
+  if (!arduino_.connected()) {
+    return hardware_interface::return_type::ERROR;
   }
 
-  new_value_l = l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate;
-  new_value_r = r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate;
+  new_value_l_ = hw_commands_[0] / rads_per_count_ / loop_rate_;
+  new_value_r_ = hw_commands_[1] / rads_per_count_ / loop_rate_;
 
-  if(new_value_l != old_value_l and new_value_r != old_value_r){
-    arduino_.setMotorValues(new_value_l, new_value_r);
-
-    RCLCPP_INFO_STREAM(logger_, "Read cmd: " << l_wheel_.cmd << ", r_wheel_: " << r_wheel_.cmd);
-    RCLCPP_INFO_STREAM(logger_, "Read rads_per_count: " << l_wheel_.rads_per_count << ", r_wheel_: " << r_wheel_.rads_per_count);
-    RCLCPP_INFO_STREAM(logger_, "Read loop_rate: " << cfg_.loop_rate << " " << cfg_.loop_rate);
-
-    old_value_l = new_value_l;
-    old_value_r = new_value_r;
+  if((new_value_l_ != old_value_l_) and (new_value_r_ != old_value_r_)){
+    arduino_.setMotorValues(new_value_l_, new_value_r_);
+    old_value_l_ = new_value_l_;
+    old_value_r_ = new_value_r_;
   }
 
-  return return_type::OK;
+//  RCLCPP_INFO(logger_, "Writing...");
+
+//  for (uint i = 0; i < hw_commands_.size(); i++) {
+    // Simulate sending commands to the hardware
+//    RCLCPP_INFO(logger_, "Got command %.5f for joint %d!", hw_commands_[i], i);
+//  }
+
+//  RCLCPP_INFO(logger_, "Joints successfully written!");
+
+  return hardware_interface::return_type::OK;
 }
 
 } // namespace diffdrive_arduino

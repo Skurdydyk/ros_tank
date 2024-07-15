@@ -7,8 +7,7 @@
 
 class Wheel
 {
-    public:
-
+public:
     std::string name = "";
     int enc = 0;
     double cmd = 0;
@@ -19,15 +18,11 @@ class Wheel
     double rads_per_count = 0;
 
     Wheel() = default;
-
     Wheel(const std::string &wheel_name, int counts_per_rev);
     
     void setup(const std::string &wheel_name, int counts_per_rev);
 
     double calcEncAngle();
-
-
-
 };
 
 

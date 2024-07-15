@@ -5,9 +5,9 @@
 #include <cstring>
 #include "rclcpp/rclcpp.hpp"
 
-class ArduinoComms{
-
-  public:
+class ArduinoComms
+{
+public:
     ArduinoComms()
     {}
 
@@ -24,7 +24,7 @@ class ArduinoComms{
 
     std::string sendMsg(const std::string &msg_to_send, bool print_output = false);
 
-  private:
+private:
     rclcpp::Logger logger_ = rclcpp::get_logger("DiffDriveArduino");
     serial::Serial serial_conn_;
 };

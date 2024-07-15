@@ -38,7 +38,7 @@ ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 
 4. Another PC terminal 
 ./exec.bash 
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap cmd_vel:=/diff_controller/cmd_vel_unstamped
 
 
 For simulation:

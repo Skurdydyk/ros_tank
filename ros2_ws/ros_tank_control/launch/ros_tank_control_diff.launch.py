@@ -1,30 +1,23 @@
-import os
-
-from ament_index_python.packages import get_package_share_directory
-
-
 from launch import LaunchDescription
-from launch.actions import TimerAction
-from launch.substitutions import Command
-from launch.actions import RegisterEventHandler
+from launch.actions import TimerAction, RegisterEventHandler
+from launch.substitutions import Command, PathJoinSubstitution
 from launch.event_handlers import OnProcessStart
 
 from launch_ros.actions import Node
-
-import xacro
+from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    rrbot_description_path = os.path.join(
-        get_package_share_directory("ros_tank_description")
+    urdf_file = "robot.xacro"
+    description_package = "ros_tank_description"
+    control_package = "ros_tank_control"
+
+    # Get URDF via xacro
+    robot_desc_path = PathJoinSubstitution(
+        [FindPackageShare(description_package), "urdf", urdf_file]
     )
 
-    xacro_file = os.path.join(rrbot_description_path, "urdf", "robot.xacro")
-
-    doc = xacro.parse(open(xacro_file))
-    xacro.process_doc(doc)
-    robot_description_config = doc.toxml()
-    robot_description = {"robot_description": robot_description_config}
+    robot_description = {"robot_description": Command(["xacro ", robot_desc_path])}
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
@@ -33,22 +26,14 @@ def generate_launch_description():
         output="screen",
     )
 
-    package_name = "ros_tank_control"
-
-    robot_description = Command(
-        ["ros2 param get --hide-type /robot_state_publisher robot_description"]
-    )
-
-    controller_params_file = os.path.join(
-        get_package_share_directory(package_name),
-        "config",
-        "diff_drive_controller.yaml",
+    robot_diff_controller = PathJoinSubstitution(
+        [FindPackageShare(control_package), "config", "diff_drive_controller.yaml"]
     )
 
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{"robot_description": robot_description}, controller_params_file],
+        parameters=[robot_description, robot_diff_controller],
     )
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])

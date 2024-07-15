@@ -14,7 +14,7 @@ docker run -it --rm \
     --env="QT_X11_NO_MITSHM=0" \
     --env="XAUTHORITY=/tmp/.docker.xauth" \
     --name="ros_tank_container" \
-    --net=host \
+    --net="my_ros2" \
     ros_tank  \
     bash
 
