@@ -60,7 +60,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "world",
                 default_value=[
-                    os.path.join(pkg_ros_tank_gazebo, "worlds", "empty.world"),
+                    os.path.join(pkg_ros_tank_gazebo, "worlds", "flat.world"),
                     "",
                 ],
                 description="SDF world file",
