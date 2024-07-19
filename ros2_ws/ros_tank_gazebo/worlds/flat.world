@@ -9,6 +9,7 @@
         <!-- A ground plane -->
         <include>
             <uri>model://ground_plane</uri>
+            <static>true</static>
         </include>
 
         <include>
@@ -16,36 +17,48 @@
             <uri>model://walls</uri>
         </include>
 
-        <model name="construction_barrel_1">
-            <pose>5 -6 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
+        <model name="floor">
+          <pose>0 0 0.02 0 0 0</pose>
+          <static>true</static>
+          <link name="link">
+            <visual name="visual">
+              <geometry>
+                <plane>
+                  <normal>0 0 1</normal>
+                  <size>20 20.5</size> <!-- Adjust size as needed -->
+                </plane>
+              </geometry>
+              <material>
+                <ambient>1 1 1 1</ambient>
+                <diffuse>1 1 1 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+                <emissive>0 0 0 0</emissive>
+              </material>
+            </visual>
+            <collision name="collision">
+              <geometry>
+                <plane>
+                  <normal>0 0 1</normal>
+                  <size>20 20.5</size> <!-- Adjust size as needed -->
+                </plane>
+              </geometry>
+              <surface>
+                <friction>
+                  <ode>
+                    <mu>100.0</mu>
+                    <mu2>50.0</mu2>
+                  </ode>
+                </friction>
+                <bounce>
+                  <restitution_coefficient>0.0</restitution_coefficient>
+                  <threshold>1000000.0</threshold>
+                </bounce>
+              </surface>
+            </collision>
+          </link>
         </model>
         <model name="construction_barrel_2">
             <pose>8 3.8 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
-        <model name="construction_barrel_3">
-            <pose>-5 20 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
-        <model name="construction_barrel_4">
-            <pose>10 16 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
-        <model name="construction_barrel_5">
-            <pose>-5 -16 0 0 -0 0</pose>
             <include>
                 <static>false</static>
                 <uri>model://construction_barrel</uri>
@@ -58,29 +71,8 @@
                 <uri>model://construction_barrel</uri>
             </include>
         </model>
-        <model name="construction_barrel_7">
-            <pose>-12 -2 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
         <model name="construction_barrel_8">
             <pose>-6.5 -1.7 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
-        <model name="construction_barrel_9">
-            <pose>5.7 -22 0 0 -0 0</pose>
-            <include>
-                <static>false</static>
-                <uri>model://construction_barrel</uri>
-            </include>
-        </model>
-        <model name="construction_barrel_10">
-            <pose>7.3 -14 0 0 -0 0</pose>
             <include>
                 <static>false</static>
                 <uri>model://construction_barrel</uri>
