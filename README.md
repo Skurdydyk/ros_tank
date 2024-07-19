@@ -41,15 +41,30 @@ ros2 launch ros_tank_logic ros_tank_rviz.launch.py
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
 
 
+_________________________________________________________________________
+_________________________________________________________________________
 For simulation:
+_________________________________________________________________________
+_________________________________________________________________________
+
+[//]: # (sourcing Gazebo's setup)
+. /usr/share/gazebo/setup.sh
 
 ros2 launch ros_tank_logic ros_tank_sim.launch.xml
+
 <!-- Spawn world in gazebo running sim -->
 - ros2 launch ros_tank_gazebo start_world.launch.py
+
 <!-- Publish URDF file in robot_description topic and launch rviz -->
-- ros2 launch ros_tank_logic ros_tank_rviz.launch.py
+- ros2 launch ros_tank_logic ros_tank_rviz_sim.launch.py
+
 <!-- Read robot_description and spawn in gazebo running sim -->
 - ros2 launch ros_tank_gazebo spawn_robot.launch.py
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+
+_________________________________________________________________________
+_________________________________________________________________________
 
 
 run joint state publisher node:

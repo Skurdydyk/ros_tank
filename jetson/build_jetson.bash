@@ -1,0 +1,1 @@
+docker build -t ros_tank_jetson -f ./docker/jetson/Dockerfile .
